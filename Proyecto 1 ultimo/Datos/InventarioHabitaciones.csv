@@ -1,0 +1,7 @@
+﻿id,tipo,ubi,cap,vista,balcon,cocina,ocupada
+2024,estandar,piso 2,2,FALSE,TRUE,FALSE,FALSE
+2334,estandar,piso 2,2,FALSE,TRUE,FALSE,TRUE
+2345,estandar,piso 2,2,FALSE,FALSE,FALSE,TRUE
+5678,suite,piso 5,4,TRUE,TRUE,FALSE,FALSE
+3452,suite doble,piso 3,6,TRUE,TRUE,TRUE,FALSE
+1788,suite,piso 1,4,FALSE,TRUE,TRUE,FALSE
