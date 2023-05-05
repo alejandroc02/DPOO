@@ -116,6 +116,7 @@ public class Habitacion {
             System.out.println("Vista: " + (this.vista ? "Sí" : "No"));
             System.out.println("Balcón: " + (this.balcon ? "Sí" : "No"));
             System.out.println("Cocina: " + (this.cocina ? "Sí" : "No"));
+			
             System.out.println("Camas:");
         } else {
             System.out.println("No se encontró ninguna habitación con el ID " + id);

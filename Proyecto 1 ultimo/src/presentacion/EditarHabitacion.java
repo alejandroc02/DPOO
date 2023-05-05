@@ -22,8 +22,6 @@ public class EditarHabitacion extends JFrame {
 	private JTextField textTipo;
 	private JTextField textUbi;
 	private JTextField textCapacidad;
-	private hotel hotel;
-	private Plano plano;
 
 	/**
 	 * Launch the application.
@@ -33,8 +31,6 @@ public class EditarHabitacion extends JFrame {
 	 * Create the frame.
 	 */
 	public EditarHabitacion(hotel hotel) {
-		this.plano = new Plano();
-		this.hotel = hotel;
 		
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

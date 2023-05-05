@@ -184,23 +184,18 @@ public class hotel {
          }
      
 	}
-	public void consultarHabitacion(int id, String tipo) {
+	public Habitacion consultarHabitacion(int id, String tipo) {
 		 Boolean ispresenteTipo=Habitaciones.containsKey(tipo);
         if(ispresenteTipo) {
        	 ArrayList<Habitacion> listaHabitacionesActuales=Habitaciones.get(tipo);
-       	 Boolean check=true;
        	 for (Habitacion habitacionActual : listaHabitacionesActuales) {
        		 int idHabitacionActual =habitacionActual.getId();
        		 if(idHabitacionActual==id) {
-       			 habitacionActual.consultarHabitacionPorId(id);
+       			 return habitacionActual;
        		 }
-        	 if (check) {
-        		 System.out.println("No existe esa habitacion");
-        	 }
        	 }
-        }else{
-            System.out.println("No existe ese tipo de habitacion");
         }
+		return null;
 	}
 	/*EMPIEZA SECCION TARIFAS
 	 * 

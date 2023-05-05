@@ -138,6 +138,12 @@ public class Adminp extends JFrame {
 		contentPane.add(btnEditarHabitacion);
 		
 		JButton btnConsultarHabitacion = new JButton("Consultar Habitaciones");
+		btnConsultarHabitacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConsultarHabitacion consultarh = new ConsultarHabitacion(hotel);
+				consultarh.setVisible(true);
+			}
+		});
 		btnConsultarHabitacion.setBounds(120, 325, 160, 28);
 		contentPane.add(btnConsultarHabitacion);
 		
