@@ -98,13 +98,16 @@ public class hotel {
             	}
                 
                 String[] fields = line4.split(cvsSplitBy);
+				if (fields.length < 4) {
+					continue;
+				}
                 
                 String DiasSemana=fields[3];
                 int precio=Integer.parseInt(fields[2]);
                 String tipo=fields[0];
                 String[] fechasSeparadas=fields[1].split("-");//split a las fechas en incial y final
                 
-            	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             	LocalDate fechaInicio = LocalDate.parse(fechasSeparadas[0], formatter); 
             	LocalDate fechaFinal = LocalDate.parse(fechasSeparadas[1], formatter);
                 

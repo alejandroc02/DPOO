@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
 
 public class Login extends JFrame {
 
@@ -51,32 +52,32 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel label = new JLabel("");
+		label.setBounds(5, 5, 142, 63);
+		contentPane.add(label);
+		
 		JLabel lblNewLabel = new JLabel("LOGIN");
+		lblNewLabel.setBounds(147, 5, 142, 63);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(170, 22, 93, 19);
 		contentPane.add(lblNewLabel);
 		
+		JLabel label_1 = new JLabel("");
+		label_1.setBounds(289, 5, 142, 63);
+		contentPane.add(label_1);
+		
 		JLabel lblNewLabel_1 = new JLabel("USUARIO");
+		lblNewLabel_1.setBounds(43, 49, 142, 63);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_1.setBounds(21, 66, 59, 13);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("CONTRASEÑA");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_2.setBounds(10, 89, 88, 13);
-		contentPane.add(lblNewLabel_2);
-		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(106, 63, 96, 19);
+		txtUsuario.setBounds(147, 69, 142, 26);
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
-		jpassClave = new JPasswordField();
-		jpassClave.setBounds(106, 86, 96, 19);
-		contentPane.add(jpassClave);
-		
 		JButton btnIngresar = new JButton("INGRESAR");
+		btnIngresar.setBounds(299, 92, 137, 39);
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				char[] clave=jpassClave.getPassword();
@@ -99,7 +100,31 @@ public class Login extends JFrame {
 				}
 			}
 		});
-		btnIngresar.setBounds(223, 81, 85, 21);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setBounds(284, 171, 142, 63);
+		contentPane.add(label_2);
+		
+		JLabel label_3 = new JLabel("");
+		label_3.setBounds(207, 194, 142, 63);
+		contentPane.add(label_3);
+		
+		JLabel label_4 = new JLabel("");
+		label_4.setBounds(147, 131, 142, 20);
+		contentPane.add(label_4);
 		contentPane.add(btnIngresar);
+		
+		JLabel lblNewLabel_2 = new JLabel("CONTRASEÑA");
+		lblNewLabel_2.setBounds(43, 111, 142, 63);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		contentPane.add(lblNewLabel_2);
+		
+		jpassClave = new JPasswordField();
+		jpassClave.setBounds(147, 131, 142, 26);
+		contentPane.add(jpassClave);
+		
+		JLabel label_5 = new JLabel("");
+		label_5.setBounds(289, 194, 142, 63);
+		contentPane.add(label_5);
 	}
 }

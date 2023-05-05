@@ -1,6 +1,7 @@
-﻿Tipo,FechaInicio,Tarifa,DiasSemana
-Estandar,6/1/2023-6/5/2023,$100 ,D-L-M
-Suite,6/3/2023-6/8/2023,$200 ,M-MI
-Estandar,6/6/2023-6/9/2023,$120 ,L-MI-V
-Suite doble,6/7/2023-6/12/2023,$250 ,V-S-D
-Estandar,6/10/2023-6/14/2023,$110 ,L-M-MI-J-V
+﻿Tipo,FechaInicio,Tarifa,DiasSemana,,
+Estandar,06/01/2023-06/05/2023,100,D-L-M,,
+Suite,06/03/2023-06/08/2023,200,M-MI,,
+Estandar,06/06/2023-06/09/2023,120,L-MI-V,,
+Suite doble,06/07/2023-06/12/2023,250,V-S-D,,
+Estandar,06/10/2023-06/14/2023,110,L-M-MI-J-V,,
+,,,,,

@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import Persistencia.Plano;
+
 
 
 public class aplicacion {
 	private hotel hotel;
 	private Boolean Autorizacion;
 	private Boolean InicioSesion = false;
+	private Plano plano;
 
 	public aplicacion(){
 		int op;
@@ -51,13 +54,10 @@ public class aplicacion {
 	}
 	
 	private void CargarArchivos() {
-		String ArchivoHabitaciones="InventarioHabitaciones.csv";
-		String ArchivoMenu="Empleados.csv";
-		String ArchivoEmpleados="Menu.csv";
-		String ArchivoTarifas="Tarifas.csv";
-		this.hotel=new hotel(ArchivoHabitaciones,ArchivoMenu,ArchivoEmpleados,ArchivoTarifas);
-		
+		plano.CargarArchivos();
 	}
+	
+	
 	public void EjecutarHabitaciones() { 
 		if (InicioSesion) {
 			Scanner cc = new Scanner(System.in);
