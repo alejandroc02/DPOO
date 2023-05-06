@@ -49,7 +49,7 @@ public class Adminp extends JFrame {
 
 		setTitle("BIENVENIDO ADMINISTRADOR");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 750, 450);
+		setBounds(100, 100, 430, 453);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -98,20 +98,18 @@ public class Adminp extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("TARIFAS");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(536, 49, 126, 13);
+		lblNewLabel_1.setBounds(136, 363, 126, 13);
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnAgregarTarifas = new JButton("Agregar Tarifas");
-		btnAgregarTarifas.setBounds(536, 76, 126, 21);
+		btnAgregarTarifas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AgregarTarifa agregart = new AgregarTarifa(hotel);
+				agregart.setVisible(true);
+			}
+		});
+		btnAgregarTarifas.setBounds(136, 386, 126, 21);
 		contentPane.add(btnAgregarTarifas);
-		
-		JButton btnEditarTarifas = new JButton("Editar Tarifas");
-		btnEditarTarifas.setBounds(536, 125, 126, 21);
-		contentPane.add(btnEditarTarifas);
-		
-		JButton btnEliminarTarifas = new JButton("Eliminar Tarifas");
-		btnEliminarTarifas.setBounds(536, 167, 126, 21);
-		contentPane.add(btnEliminarTarifas);
 		
 		JLabel lblNewLabel_2 = new JLabel("HABITACIONES");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -121,7 +119,8 @@ public class Adminp extends JFrame {
 		JButton btnAgregarHabitaciones = new JButton("Agregar Habitaciones");
 		btnAgregarHabitaciones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				AgregarHabitacion agregarh = new AgregarHabitacion(hotel);
+				agregarh.setVisible(true);
 			}
 		});
 		btnAgregarHabitaciones.setBounds(62, 273, 135, 28);
@@ -146,10 +145,5 @@ public class Adminp extends JFrame {
 		});
 		btnConsultarHabitacion.setBounds(120, 325, 160, 28);
 		contentPane.add(btnConsultarHabitacion);
-		
-		JLabel lblNewLabel_3 = new JLabel("CARGA DE ARCHIVOS");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_3.setBounds(517, 341, 190, 13);
-		contentPane.add(lblNewLabel_3);
 	}
 }
