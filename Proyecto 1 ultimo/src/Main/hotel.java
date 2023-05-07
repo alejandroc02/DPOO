@@ -104,6 +104,9 @@ public class hotel {
             	}
                 
                 String[] fields = line4.split(cvsSplitBy);
+				if (fields.length < 4) {
+					continue;
+				}
                 
                 String DiasSemana=fields[3];
                 int precio=Integer.parseInt(fields[2]);
@@ -165,11 +168,10 @@ public class hotel {
              Habitaciones.put(tipo, listaHabitaciones);
          }
 	}
-	public void editarHabitacion(int id, String tipo, String ubicacion, int capacidad, boolean vista, boolean balcon, boolean cocina) {
+	public Boolean editarHabitacion(int id, String tipo, String ubicacion, int capacidad, boolean vista, boolean balcon, boolean cocina) {
 		 Boolean ispresenteTipo=Habitaciones.containsKey(tipo);
          if(ispresenteTipo) {
         	 ArrayList<Habitacion> listaHabitacionesActuales=Habitaciones.get(tipo);
-        	 Boolean check=true;
         	 for (Habitacion habitacionActual : listaHabitacionesActuales) {
         		 int idHabitacionActual =habitacionActual.getId();
         		 if(idHabitacionActual==id) {
@@ -178,34 +180,27 @@ public class hotel {
         			 habitacionActual.setCocina(cocina);
         			 habitacionActual.setUbicacion(ubicacion);
         			 habitacionActual.setVista(vista);
-        			 check=false;
+					 return true;
         		 }
         	 }
-        	 if (check) {
-        		 System.out.println("No existe esa habitacion");
-        	 }
-         }else{
-             System.out.println("No existe ese tipo de habitacion");
          }
+		 return false;
      
 	}
-	public void consultarHabitacion(int id, String tipo) {
-		 Boolean ispresenteTipo=Habitaciones.containsKey(tipo);
+	public String consultarHabitacion(int id, String tipo) {
+		Boolean ispresenteTipo=Habitaciones.containsKey(tipo);
         if(ispresenteTipo) {
        	 ArrayList<Habitacion> listaHabitacionesActuales=Habitaciones.get(tipo);
-       	 Boolean check=true;
        	 for (Habitacion habitacionActual : listaHabitacionesActuales) {
        		 int idHabitacionActual =habitacionActual.getId();
        		 if(idHabitacionActual==id) {
-       			 habitacionActual.consultarHabitacionPorId(id);
+				String cadena="Ubicación: "+habitacionActual.getUbicacion()+"\n"+"Tipo: "+habitacionActual.getTipo()+"\n"+
+				"Capacidad: "+java.lang.String.valueOf(habitacionActual.getCapacidad())+"\n"+"Vista: "+java.lang.String.valueOf(habitacionActual.isVista())+"\n"+"Balcon: "+java.lang.String.valueOf(habitacionActual.isBalcon())+"\n"+"Cocina: "+java.lang.String.valueOf(habitacionActual.isCocina());
+				return cadena;
        		 }
-        	 if (check) {
-        		 System.out.println("No existe esa habitacion");
-        	 }
        	 }
-        }else{
-            System.out.println("No existe ese tipo de habitacion");
         }
+		return null;
 	}
 	/*EMPIEZA SECCION TARIFAS
 	 * 

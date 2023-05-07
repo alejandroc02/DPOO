@@ -104,23 +104,6 @@ public class Habitacion {
 	public void setCocina(boolean cocina) {
 		this.cocina = cocina;
 	}
-
-
-	public void consultarHabitacionPorId(int id) {
-        if (this.id == id) {
-            System.out.println("Habitación encontrada:");
-            System.out.println("ID: " + this.id);
-            System.out.println("Tipo: " + this.tipo);
-            System.out.println("Ubicación: " + this.ubicacion);
-            System.out.println("Capacidad: " + this.capacidad);
-            System.out.println("Vista: " + (this.vista ? "Sí" : "No"));
-            System.out.println("Balcón: " + (this.balcon ? "Sí" : "No"));
-            System.out.println("Cocina: " + (this.cocina ? "Sí" : "No"));
-            System.out.println("Camas:");
-        } else {
-            System.out.println("No se encontró ninguna habitación con el ID " + id);
-        }
-    }
     
     
     }
