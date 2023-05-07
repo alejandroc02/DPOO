@@ -69,7 +69,8 @@ public class Adminp extends JFrame {
 		JButton btnEliminarProducto = new JButton("Eliminar Servicio");
 		btnEliminarProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				EliminarServicio eliminars = new EliminarServicio(hotel);
+				eliminars.setVisible(true);
 			}
 		});
 		btnEliminarProducto.setBounds(266, 125, 198, 28);
