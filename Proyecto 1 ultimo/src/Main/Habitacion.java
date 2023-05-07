@@ -25,18 +25,10 @@ public class Habitacion {
         this.vista = vista;
         this.balcon = balcon;
         this.cocina = cocina;
-<<<<<<< HEAD
         
     }
     public HashMap<LocalDate, Boolean> GetMapaFechas(){
     	return this.mapaFechasOcupadas;
-=======
-		this.ocupada = ocupada;
-	}
-
-    public HashMap<LocalDate, Integer> GetMapaFechas(){
-    	return this.mapaFechas;
->>>>>>> 362c3658f6452bb09fede335aa5feb5519cc4bb9
     }
     public void agregarFechaReservada(LocalDate fechaInicio,LocalDate fechaFin) {
     	 LocalDate fecha = fechaInicio;

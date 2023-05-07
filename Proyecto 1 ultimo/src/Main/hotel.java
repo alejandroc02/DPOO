@@ -179,48 +179,6 @@ public class hotel {
 	public HashMap<String, String> consultarPersonal() {
 		return this.listaPersonal;
 	}
-<<<<<<< HEAD
-	
-	public HashMap<LocalDate,Boolean> consultarFechasReservadas(LocalDate fechaInicio, LocalDate fechaFinal){
-		HashMap<LocalDate,Boolean> mapaRespuesta=new HashMap<LocalDate,Boolean>();
-		for (ArrayList<Habitacion> listaHabitaciones:Habitaciones.values()) {
-			for(Habitacion habitacion:listaHabitaciones) {
-				HashMap<LocalDate, Boolean>  mapaFechasOcupadasActual=habitacion.GetMapaFechas();
-				ArrayList<LocalDate> listaFechasOcupadasActual=new ArrayList<LocalDate>();
-				for(LocalDate fechaHabitaciono:mapaFechasOcupadasActual.keySet()) {
-					
-					listaFechasOcupadasActual.add(fechaHabitaciono);
-				}
-				LocalDate minDate=Collections.min(listaFechasOcupadasActual);
-				LocalDate maxDate=Collections.max(listaFechasOcupadasActual);
-				
-				LocalDate currentDate=minDate;
-				while(currentDate.isBefore(maxDate)||currentDate.equals(maxDate)) {
-					mapaRespuesta.put(currentDate, true);
-					currentDate=currentDate.plusDays(1);
-					
-				}
-		}
-				}
-		return mapaRespuesta;
-		
-	}
-	
-	public void agregarHabitacion(int id, String tipo, String ubicacion, int capacidad, boolean vista, boolean balcon, boolean cocina, boolean EstaOcupada) {
-		Habitacion hab=new Habitacion(id,tipo,ubicacion,capacidad,vista,balcon,cocina) ;
-		
-		 Boolean ispresenteTipo=Habitaciones.containsKey(tipo);
-         if(ispresenteTipo) {
-         	ArrayList<Habitacion> listaHabitacionesActuales=Habitaciones.get(tipo);
-         	listaHabitacionesActuales.add(hab);
-         	Habitaciones.put(tipo, listaHabitacionesActuales);
-         	
-         }else{
-             ArrayList<Habitacion> listaHabitaciones=new ArrayList<Habitacion>();
-             listaHabitaciones.add(hab);
-             Habitaciones.put(tipo, listaHabitaciones);
-         }
-=======
 
 	public void agregarHabitacion(int id, String tipo, String ubicacion, int capacidad, boolean vista, boolean balcon,
 			boolean cocina, boolean EstaOcupada) {
@@ -237,7 +195,6 @@ public class hotel {
 			listaHabitaciones.add(hab);
 			Habitaciones.put(tipo, listaHabitaciones);
 		}
->>>>>>> 362c3658f6452bb09fede335aa5feb5519cc4bb9
 	}
 
 	public Boolean editarHabitacion(int id, String tipo, String ubicacion, int capacidad, boolean vista, boolean balcon,
@@ -418,55 +375,6 @@ public class hotel {
 			System.out.println("El huesped no esta registrado");
 		}
 	}
-<<<<<<< HEAD
-	
-	public void consultarReserva(String id) {
-		boolean isPresenteReserva=mapaReserva.containsKey(id);
-		if(isPresenteReserva) {
-			Reserva ReservaActual=mapaReserva.get(id);
-			System.out.println("Check in "+ReservaActual.getFechaCheckin());
-			System.out.println("Check out "+ReservaActual.getFechaCheckout());
-			System.out.println("cantidadAdultos "+ReservaActual.getCantidadAdultos());
-			System.out.println("cantidadNinos "+ReservaActual.getCantidadNinos());
-			System.out.println("Estado "+ReservaActual.getEstado());
-			System.out.println("Cantidad habtiaciones "+ReservaActual.cantidadHabitaciones());
-			
-		}else {
-			System.out.println("Reserva no existe");
-		}
-	}
-	
-	public HashMap<Integer, Habitacion> encontrarHabitacion( boolean vista, boolean balcon, boolean cocina,String Tipo,String fechaIn,String fechaFi){
-		HashMap<Integer, Habitacion> MapaRespuesta= new HashMap<>();
-		
-				boolean isPresente=Habitaciones.containsKey(Tipo);
-				if (isPresente) {
-					ArrayList<Habitacion> listaHabitaciones=Habitaciones.get(Tipo);
-					for(Habitacion habitacion:listaHabitaciones) {
-						
-						if(habitacion.isVista()==vista) {
-							MapaRespuesta.put(habitacion.getId(), habitacion);
-						}
-					for (Habitacion habitacion1:MapaRespuesta.values()) {
-						if(habitacion1.isCocina()   ==cocina) {
-							MapaRespuesta.put(habitacion1.getId(), habitacion1);
-						}else {
-							MapaRespuesta.remove(habitacion1.getId());
-						}
-					}
-					for (Habitacion habitacion2:MapaRespuesta.values()) {
-						if(habitacion2.isBalcon()   ==balcon) {
-							MapaRespuesta.put(habitacion2.getId(), habitacion2);
-						}else {
-							MapaRespuesta.remove(habitacion2.getId());
-						}
-
-				}
-					}}
-				
-					else {
-					System.out.println("el tipo de habtiacion no es valdios");
-=======
 
 	public void consultarReserva(int id) {
 		boolean isPresenteReserva = mapaReserva.containsKey(id);
@@ -495,7 +403,6 @@ public class hotel {
 
 				if (habitacion.isVista() == vista) {
 					MapaRespuesta.put(habitacion.getId(), habitacion);
->>>>>>> 362c3658f6452bb09fede335aa5feb5519cc4bb9
 				}
 				for (Habitacion habitacion1 : MapaRespuesta.values()) {
 					if (habitacion1.isCocina() == cocina) {
@@ -511,17 +418,17 @@ public class hotel {
 						MapaRespuesta.remove(habitacion2.getId());
 					}
 					for (Habitacion habitacion3 : MapaRespuesta.values()) {
-						HashMap<LocalDate, Integer> mapaFechas = habitacion3.GetMapaFechas();
+						HashMap<LocalDate, Boolean> mapaFechas = habitacion3.GetMapaFechas();
 						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 						LocalDate fechaInicio = LocalDate.parse(fechaIn, formatter);
 						LocalDate fechaFinal = LocalDate.parse(fechaFi, formatter);
 
 						LocalDate fecha = fechaInicio;
 						while (!fecha.isAfter(fechaFinal)) {
-							Integer isPresenteFecha = mapaFechas.get(fecha);
+							Boolean isPresenteFecha = mapaFechas.get(fecha);
 							if (isPresenteFecha != null) {
 								MapaRespuesta.put(habitacion3.getId(), habitacion3);
-								mapaFechas.put(fecha, 0);
+								mapaFechas.put(fecha, false);
 							} else {
 								MapaRespuesta.remove(habitacion3.getId());
 							}
@@ -539,13 +446,8 @@ public class hotel {
 			System.out.println("el tipo de habtiacion no es valdios");
 		}
 
-<<<<<<< HEAD
-		return MapaRespuesta;
-		
-=======
 		return null;
 
->>>>>>> 362c3658f6452bb09fede335aa5feb5519cc4bb9
 	}
 
 	public HashMap<Integer, Habitacion> encontrarHabitacionesIndivudales(int cantidadHabitaciones, int totalPersonas,
@@ -584,44 +486,6 @@ public class hotel {
 		}
 		return mapaRespuesta1; // Devolver mapaRespuesta aunque no se hayan satisfecho todas las habitaciones
 	}
-<<<<<<< HEAD
-	
-	public HashMap<Integer, Habitacion> encontrarHabitaciones(ArrayList<Habitacion> HabitacionesVaforables, int cantidadHabitaciones, int totalPersonas) {
-	    int w = 0;
-	    int capacidadTotalHabitaciones = 0;
-	    boolean encontrado = false;
-	    HashMap<Integer, Habitacion> MapaRespuesta = new HashMap<Integer, Habitacion>();
-	    while (w <= HabitacionesVaforables.size() - cantidadHabitaciones && !encontrado) {
-	        capacidadTotalHabitaciones = 0;
-	        for (int i = w; i < w + cantidadHabitaciones; i++) {
-	            Habitacion habitacionActual = HabitacionesVaforables.get(i);
-	            capacidadTotalHabitaciones += habitacionActual.getCapacidad();
-	        }
-	        if (capacidadTotalHabitaciones >= totalPersonas) {
-	            MapaRespuesta.clear();
-	            for (int i = w; i < w + cantidadHabitaciones; i++) {
-	                Habitacion habitacionActual = HabitacionesVaforables.get(i);
-	                MapaRespuesta.put(habitacionActual.getId(), habitacionActual);
-	            }
-	            encontrado = true;
-	        } else {
-	            w++;
-	        }
-	    }
-	    return MapaRespuesta;
-	}
-	
-	public void marcarHabitacionesComoReservadas(HashMap<Integer, Habitacion> MapaRespuesta, LocalDate fechaInicio, LocalDate fechaFin) {
-		for(Habitacion habitacion:MapaRespuesta.values()) {
-			habitacion.agregarFechaReservada(fechaInicio, fechaFin);
-		}
-	}
-	
-	public int calcularReserva(String tipo,LocalDate fechaCheckin,LocalDate fechaCheckout) {
-		
-		Calendario calendario=listaTarifa.get(tipo);
-=======
->>>>>>> 362c3658f6452bb09fede335aa5feb5519cc4bb9
 
 	public HashMap<Integer, Habitacion> encontrarHabitaciones(ArrayList<Habitacion> HabitacionesVaforables,
 			int cantidadHabitaciones, int totalPersonas) {
@@ -662,28 +526,12 @@ public class hotel {
 
 		return respuesta;
 	}
-<<<<<<< HEAD
-	public void crearReserva(String id,String idReserva,LocalDate fechaCheckin, LocalDate fechaCheckout, HashMap<Integer, Habitacion> mapaHabitaciones,
-			int cantidadAdultos, int cantidadNinos,  HashMap<Integer, Huesped> mapaHuespedes, int precioOriginal){
-		Reserva reservaActual = new Reserva(idReserva, idReserva, idReserva, mapaHabitaciones, precioOriginal, precioOriginal, mapaHuespedes, precioOriginal);//AQUIIIVOY
-		mapaReserva.put(idReserva, reservaActual);
-		
-	}
-	
-	public void checkIn(String idReserva) {
-		
-	}
-	
-	public void checkCout(String idReserva) {
-		
-=======
 
 	public void crearReserva(String idReserva, String fechaCheckin, String fechaCheckout,
 			HashMap<Integer, Habitacion> mapaHabitaciones,
 			int cantidadAdultos, int cantidadNinos, HashMap<Integer, Huesped> mapaHuespedes) {
 		// Reserva reservaActual = new Reserva();//AQUIIIVOY
 
->>>>>>> 362c3658f6452bb09fede335aa5feb5519cc4bb9
 	}
 	// podemos agregar funcion para que cargue un archivo
 	// la funcion consultarServicios podria retornar el mapa si es necesario, es
