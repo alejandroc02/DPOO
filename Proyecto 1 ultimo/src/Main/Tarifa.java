@@ -53,6 +53,29 @@ public class Tarifa {
 	public int getPrecio() {
 		return precio;
 	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	public void setId(String id) {
+		Id = id;
+	}
+
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public void setFechaFinal(String fechaFinal) {
+		this.fechaFinal = fechaFinal;
+	}
+
+	public void setDiasDeLaSemana(String diasDeLaSemana) {
+		this.diasDeLaSemana = diasDeLaSemana;
+	}
+
+	public void setPrecio(int precio) {
+		this.precio = precio;
+	}
     
    
     

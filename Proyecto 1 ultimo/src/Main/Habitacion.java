@@ -11,6 +11,7 @@ public class Habitacion {
     private boolean vista;
     private boolean balcon;
     private boolean cocina;
+	private boolean ocupada;
     private ArrayList<Cama> camas;
     HashMap<LocalDate, Boolean> mapaFechasOcupadas = new HashMap<>();
 
@@ -24,10 +25,18 @@ public class Habitacion {
         this.vista = vista;
         this.balcon = balcon;
         this.cocina = cocina;
+<<<<<<< HEAD
         
     }
     public HashMap<LocalDate, Boolean> GetMapaFechas(){
     	return this.mapaFechasOcupadas;
+=======
+		this.ocupada = ocupada;
+	}
+
+    public HashMap<LocalDate, Integer> GetMapaFechas(){
+    	return this.mapaFechas;
+>>>>>>> 362c3658f6452bb09fede335aa5feb5519cc4bb9
     }
     public void agregarFechaReservada(LocalDate fechaInicio,LocalDate fechaFin) {
     	 LocalDate fecha = fechaInicio;
@@ -39,6 +48,8 @@ public class Habitacion {
     public int getId() {
 		return id;
 	}
+	public boolean estaOcupada() {
+        return ocupada; }
 
 
 	public void setId(int id) {
@@ -105,23 +116,21 @@ public class Habitacion {
 		this.cocina = cocina;
 	}
 
+	public boolean isOcupada() {
+		return ocupada;
+	}
 
-	public void consultarHabitacionPorId(int id) {
-        if (this.id == id) {
-            System.out.println("Habitación encontrada:");
-            System.out.println("ID: " + this.id);
-            System.out.println("Tipo: " + this.tipo);
-            System.out.println("Ubicación: " + this.ubicacion);
-            System.out.println("Capacidad: " + this.capacidad);
-            System.out.println("Vista: " + (this.vista ? "Sí" : "No"));
-            System.out.println("Balcón: " + (this.balcon ? "Sí" : "No"));
-            System.out.println("Cocina: " + (this.cocina ? "Sí" : "No"));
-            System.out.println("Camas:");
-        } else {
-            System.out.println("No se encontró ninguna habitación con el ID " + id);
-        }
-    }
+	private ArrayList<Habitacion> habitaciones;
+    public boolean consultarOcupacion(int id) {
+        for (Habitacion habitacion : habitaciones) {
+             if (habitacion.getId() == id) {
+                 return habitacion.estaOcupada();
+                }
+            }
+            // si no se encuentra la habitación con el ID especificado, se devuelve false
+            return false; }}
+
     
     
-    }
+    
 

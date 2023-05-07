@@ -15,13 +15,18 @@ public class restaurante {
 	
 	
 	
-	public restaurante(String Archvio) {
-        try (BufferedReader br = new BufferedReader(new FileReader("Datos/"+Archvio))) {
+	public restaurante(String archivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Datos/"+archivo))) {
         	String line = "";
         	String cvsSplitBy = ",";
+			boolean Check1 = true;
 
             while ((line = br.readLine()) != null) {
-                
+                if (Check1) {
+
+					Check1 = false;
+					continue;
+				}
                 String[] fields = line.split(cvsSplitBy);
                 
            
@@ -35,6 +40,22 @@ public class restaurante {
         } catch (IOException e) {
             e.printStackTrace();}
 	}
+	public void AgregarProducto(String nombre, int precio, boolean habitacion){
+		listaMenu.put(nombre, precio);
+		listaMenuAutorizada.put(nombre, habitacion);
+	}
+	public boolean EliminarProducto(String nombre) {
+		boolean existe=listaMenu.containsKey(nombre);
+		if(existe){
+			listaMenu.remove(nombre);
+			listaMenuAutorizada.remove(nombre);
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+	
 	public void getMenu() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Desea consultar el menu habilitado para las habitaciones ?(SI o NO)");

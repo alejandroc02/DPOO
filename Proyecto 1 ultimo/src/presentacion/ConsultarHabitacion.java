@@ -53,12 +53,10 @@ public class ConsultarHabitacion extends JFrame {
 				if (textID.getText()!="" && textTipo.getText()!="") {
 					int id= Integer.parseInt(textID.getText());
 					String tipo = textTipo.getText();
-					Habitacion habitacion=hotel.consultarHabitacion(id, tipo);
-					if (habitacion ==null) {
+					String cadena=hotel.consultarHabitacion(id, tipo);
+					if (cadena ==null) {
 						JOptionPane.showMessageDialog(null, "No se encontró la habitación");
 					}else {
-						String cadena="Ubicación: "+habitacion.getUbicacion()+"\n"+"Tipo: "+habitacion.getTipo()+"\n"+
-								"Capacidad: "+String.valueOf(habitacion.getCapacidad())+"\n"+"Vista: "+String.valueOf(habitacion.isVista())+"\n"+"Balcon: "+String.valueOf(habitacion.isBalcon())+"\n"+"Cocina: "+String.valueOf(habitacion.isCocina());
 						JOptionPane.showMessageDialog(null, cadena);
 					}
 					

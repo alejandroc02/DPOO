@@ -22,6 +22,7 @@ public class AgregarTarifa extends JFrame {
 	private JTextField textTipo;
 	private JTextField textPrecio;
 	private JTextField textDias;
+	private JTextField textid;
 
 	/**
 	 * Launch the application.
@@ -32,9 +33,9 @@ public class AgregarTarifa extends JFrame {
 	 * @param hotel 
 	 */
 	public AgregarTarifa(hotel hotel) {
-		setTitle("Agregar Tarifas");
+		setTitle("Agregar o Editar tarifas");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 364);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -67,12 +68,12 @@ public class AgregarTarifa extends JFrame {
 				if(textPrecio.getText().equals("") || textTipo.getText().equals("") || textDias.getText().equals("") || textFecha.getText().equals("")){
 					JOptionPane.showMessageDialog(null, "COMPLETE TODOS LOS CAMPOS!");
 				}else {
-					int id= Integer.parseInt(textPrecio.getText());
+					String id= textid.getText();
 					String tipo = textTipo.getText();
 					String dias = textDias.getText();
 					int precio = Integer.parseInt(textPrecio.getText());
 					String fecha = textFecha.getText();
-					hotel.agregarTarifa(fecha, dias, precio, tipo);
+					hotel.agregarTarifa(id, fecha, dias, precio, tipo);
 					JOptionPane.showMessageDialog(null, "HECHO!");
 					textPrecio.setText("");
 					textTipo.setText("");
@@ -81,7 +82,7 @@ public class AgregarTarifa extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(215, 217, 85, 21);
+		btnNewButton.setBounds(10, 296, 85, 21);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Digite fecha asi dd/MM/yyyyInicial-dd/MM/yyyyFinal");
@@ -99,6 +100,14 @@ public class AgregarTarifa extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("Digite dias semana asi L-M-MI-J-V");
 		lblNewLabel_3.setBounds(10, 195, 182, 13);
 		contentPane.add(lblNewLabel_3);
+		
+		textid = new JTextField();
+		textid.setBounds(10, 267, 96, 19);
+		contentPane.add(textid);
+		textid.setColumns(10);
+		
+		JLabel lblNewLabel_4 = new JLabel("ID");
+		lblNewLabel_4.setBounds(10, 244, 45, 13);
+		contentPane.add(lblNewLabel_4);
 	}
-
 }

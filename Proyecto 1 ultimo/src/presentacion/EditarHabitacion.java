@@ -86,8 +86,12 @@ public class EditarHabitacion extends JFrame {
 					Boolean balcon = chckbxBalcon.isSelected();
 					Boolean cocina = chckbxCocina.isSelected();
 					Boolean vista = chckbxVista.isSelected();
-					hotel.editarHabitacion(id, tipo, ubi, capacidad, vista, balcon, cocina);
-					JOptionPane.showMessageDialog(null, "HECHO!");
+					Boolean bool=hotel.editarHabitacion(id, tipo, ubi, capacidad, vista, balcon, cocina);
+					if (bool){
+						JOptionPane.showMessageDialog(null, "HECHO!");
+					}else{
+						JOptionPane.showMessageDialog(null, "Error, no existe esa habitación");
+					}
 					textID.setText("");
 					textTipo.setText("");
 					textCapacidad.setText("");
