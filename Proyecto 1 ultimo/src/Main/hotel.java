@@ -542,9 +542,8 @@ public class hotel {
 
 	}
 
-	public void consultarServicios() {
-		Servicio.getServicios();
-
+	public Object consultarServicio(String nombre){
+		return Servicio.getServicioEspecifico(nombre);
 	}
 
 	public Factura solicitarNuevoServicio(String nombre) {

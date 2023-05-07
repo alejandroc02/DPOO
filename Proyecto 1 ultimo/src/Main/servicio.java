@@ -1,21 +1,11 @@
 package Main;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+
 
 public class servicio {
 	private HashMap<String,Integer> MapaSerivicios=new HashMap<>();
-	
-	public void getServicios() {
-		Iterator<Map.Entry<String,Integer>> iterador = MapaSerivicios.entrySet().iterator();
-		while(iterador.hasNext()) {
-			Map.Entry<String, Integer> entry=iterador.next();
-			String servicio =entry.getKey();
-			Integer precio = entry.getValue();
-			System.out.println("Servicio: "+servicio+"Precio"+precio);
-		}
-	}
+
 	public Integer getServicioEspecifico(String tipoServicio) {
 		return this.MapaSerivicios.get(tipoServicio);
 		
@@ -33,16 +23,6 @@ public class servicio {
 			return true;
 		}else {
 			return false;
-		}
-	}
-	
-	public void editarServicio(String nombre, int precio) {
-		boolean isPresente  = MapaSerivicios.containsKey(nombre);
-		if (isPresente) {
-			MapaSerivicios.replace(nombre, precio);
-			System.out.println("editado correctamente");
-		}else {
-			System.out.println("el servicio no existe");
 		}
 	}
 		
