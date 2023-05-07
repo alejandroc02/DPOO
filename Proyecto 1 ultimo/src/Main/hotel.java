@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -148,6 +149,31 @@ public class hotel {
 	
 	public HashMap<String,String> consultarPersonal(){
 		return this.listaPersonal;
+	}
+	
+	public HashMap<LocalDate,Boolean> consultarFechasReservadas(LocalDate fechaInicio, LocalDate fechaFinal){
+		HashMap<LocalDate,Boolean> mapaRespuesta=new HashMap<LocalDate,Boolean>();
+		for (ArrayList<Habitacion> listaHabitaciones:Habitaciones.values()) {
+			for(Habitacion habitacion:listaHabitaciones) {
+				HashMap<LocalDate, Boolean>  mapaFechasOcupadasActual=habitacion.GetMapaFechas();
+				ArrayList<LocalDate> listaFechasOcupadasActual=new ArrayList<LocalDate>();
+				for(LocalDate fechaHabitaciono:mapaFechasOcupadasActual.keySet()) {
+					
+					listaFechasOcupadasActual.add(fechaHabitaciono);
+				}
+				LocalDate minDate=Collections.min(listaFechasOcupadasActual);
+				LocalDate maxDate=Collections.max(listaFechasOcupadasActual);
+				
+				LocalDate currentDate=minDate;
+				while(currentDate.isBefore(maxDate)||currentDate.equals(maxDate)) {
+					mapaRespuesta.put(currentDate, true);
+					currentDate=currentDate.plusDays(1);
+					
+				}
+		}
+				}
+		return mapaRespuesta;
+		
 	}
 	
 	public void agregarHabitacion(int id, String tipo, String ubicacion, int capacidad, boolean vista, boolean balcon, boolean cocina, boolean EstaOcupada) {
@@ -320,7 +346,7 @@ public class hotel {
 		}
 	}
 	
-	public void consultarReserva(int id) {
+	public void consultarReserva(String id) {
 		boolean isPresenteReserva=mapaReserva.containsKey(id);
 		if(isPresenteReserva) {
 			Reserva ReservaActual=mapaReserva.get(id);
@@ -360,33 +386,11 @@ public class hotel {
 						}else {
 							MapaRespuesta.remove(habitacion2.getId());
 						}
-					for (Habitacion habitacion3:MapaRespuesta.values()) {
-						HashMap<LocalDate, Integer> mapaFechas = habitacion3.GetMapaFechas();
-					    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-						LocalDate fechaInicio=LocalDate.parse(fechaIn,formatter);
-						LocalDate fechaFinal=LocalDate.parse(fechaFi,formatter);
-						
-				    	 LocalDate fecha = fechaInicio;
-				         while (!fecha.isAfter(fechaFinal)) {
-				        	 Integer isPresenteFecha=mapaFechas.get(fecha);
-				        	 if(isPresenteFecha!=null) {
-				        		 MapaRespuesta.put(habitacion3.getId(), habitacion3);
-				        		 mapaFechas.put(fecha, 0);
-				        	 }else {
-				        		 MapaRespuesta.remove(habitacion3.getId());
-				        	 }
-				        	 
-				             
-				             fecha = fecha.plusDays(1);																			
-				         }
-				        
-					}
-					for (Habitacion habitacion4:MapaRespuesta.values()) {
-						 
-					} 
-					}
-					}
-				}else {
+
+				}
+					}}
+				
+					else {
 					System.out.println("el tipo de habtiacion no es valdios");
 				}
 		
@@ -396,7 +400,7 @@ public class hotel {
 
 
 
-		return null;
+		return MapaRespuesta;
 		
 	}
 	
@@ -460,6 +464,12 @@ public class hotel {
 	    return MapaRespuesta;
 	}
 	
+	public void marcarHabitacionesComoReservadas(HashMap<Integer, Habitacion> MapaRespuesta, LocalDate fechaInicio, LocalDate fechaFin) {
+		for(Habitacion habitacion:MapaRespuesta.values()) {
+			habitacion.agregarFechaReservada(fechaInicio, fechaFin);
+		}
+	}
+	
 	public int calcularReserva(String tipo,LocalDate fechaCheckin,LocalDate fechaCheckout) {
 		
 		Calendario calendario=listaTarifa.get(tipo);
@@ -473,9 +483,18 @@ public class hotel {
 
 		return respuesta;
 	}
-	public void crearReserva(String idReserva,String fechaCheckin, String fechaCheckout, HashMap<Integer, Habitacion> mapaHabitaciones,
-			int cantidadAdultos, int cantidadNinos,  HashMap<Integer, Huesped> mapaHuespedes){
-		//Reserva reservaActual = new Reserva();//AQUIIIVOY
+	public void crearReserva(String id,String idReserva,LocalDate fechaCheckin, LocalDate fechaCheckout, HashMap<Integer, Habitacion> mapaHabitaciones,
+			int cantidadAdultos, int cantidadNinos,  HashMap<Integer, Huesped> mapaHuespedes, int precioOriginal){
+		Reserva reservaActual = new Reserva(idReserva, idReserva, idReserva, mapaHabitaciones, precioOriginal, precioOriginal, mapaHuespedes, precioOriginal);//AQUIIIVOY
+		mapaReserva.put(idReserva, reservaActual);
+		
+	}
+	
+	public void checkIn(String idReserva) {
+		
+	}
+	
+	public void checkCout(String idReserva) {
 		
 	}
 	// podemos agregar funcion para que cargue un archivo

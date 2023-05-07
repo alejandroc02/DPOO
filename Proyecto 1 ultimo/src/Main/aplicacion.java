@@ -192,8 +192,8 @@ public class aplicacion {
 			System.out.println("\n1. Consultar Reserva\n2. Crear reserva \n3. Check in\n3. Check out");
 			int opcion=cc.nextInt();
 			if(opcion==1) {
-				System.out.println("Ingrese id de la rserva");
-				int idReserva=cc.nextInt();
+				System.out.println("Ingrese id de la rserva(nombre a quien se hizo)");
+				String idReserva=cc.nextLine();
 				hotel.consultarReserva(idReserva);
 				
 			}else if(opcion==2) {
@@ -272,43 +272,40 @@ public class aplicacion {
 		        }
 		        boolean Continuar =	false;
 		        System.out.println("Las habitaciones son :");
+		        int totalReserva=0;
 		        
 		        for (Habitacion habitacionActual : MapaRespuesta.values()) {
 
 		        	System.out.println("Habitacion numero: "+habitacionActual.getId());
-		        	int total=0;
+		        	
 		        	LocalDate fechaIN = LocalDate.parse(fechaCheckin);
 		        	LocalDate fehcaOut = LocalDate.parse(fechaCheckout);
-		        	total=hotel.calcularReserva(habitacionActual.getTipo(),fechaIN,fehcaOut);
-		        	System.out.println("Precio por total de dias: "+total);
+		        	totalReserva=hotel.calcularReserva(habitacionActual.getTipo(),fechaIN,fehcaOut);
+		        	System.out.println("Precio por total de dias: "+totalReserva);
 		        }
 		        
 		        while(!Continuar) {
 		        	System.out.println("¿Desea continuar con la reserva? (s/n)");
 			        String respuesta = scanner.nextLine();
 			        if (respuesta.equalsIgnoreCase("s")) {
+			        	LocalDate fechaIN = LocalDate.parse(fechaCheckin);
+			        	LocalDate fehcaOut = LocalDate.parse(fechaCheckout);
+			        	System.out.println("a nombre de quien es la reserva?");
+			        	String idReserva = scanner.nextLine();
+			        	hotel.marcarHabitacionesComoReservadas(MapaRespuesta, fechaIN, fehcaOut);
 			            System.out.println("Continuando con la reserva...");
-			            System.out.println("El precio total de la reserva sin servicios es de: ");
+			            System.out.println("El precio total de la reserva sin servicios es de: " +totalReserva);
 			        	//debe de poder reconcoer los dias de la semana
 			        	//y calcuclar dia por dia
-			            hotel.crearReserva(fechaCheckin, fechaCheckout, tipo, MapaRespuesta, cantidadAdultos, cantidadNinos, MapaHuesped);
+			            hotel.crearReserva(idReserva,tipo, fechaIN, fehcaOut, MapaRespuesta, cantidadAdultos, cantidadNinos, MapaHuesped,totalReserva);
+			            System.out.println("Reserva creada correctamente");
 			        } else {
 			            System.out.println("Cancelando la reserva...");
 			        }
 		        }
-		        
-		        System.out.println("¿Desea continuar con la reserva? (s/n)");
-		        String respuesta = scanner.nextLine();
-		        
-		        if (respuesta.equalsIgnoreCase("s")) {
-		            System.out.println("Continuando con la reserva...");
-		        } else {
-		            System.out.println("Cancelando la reserva...");
+
 		        }
-		        hotel.crearReserva(fechaCheckin, fechaCheckout, tipo, MapaRespuesta, cantidadAdultos, cantidadNinos, MapaHuesped);
-		        
-		        }  
-			}else if(opcion==3) {
+		        }else if(opcion==3) {
 				
 			}else if(opcion==4) {
 				

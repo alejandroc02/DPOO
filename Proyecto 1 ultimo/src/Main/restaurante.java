@@ -52,10 +52,11 @@ public class restaurante {
 				Map.Entry<String, Boolean> entry=iterador2.next();
 				String prducto=entry.getKey();
 				Boolean precio = entry.getValue();
-				System.out.println("Nombre: "+prducto+"Precio"+precio);
+				System.out.println("Nombre: "+prducto+" Autrizacion "+precio);
 			}
 		}
 	}
+
 	public void crearPedido(boolean Hab) {
 		pedido= new Pedido(Hab);
 		

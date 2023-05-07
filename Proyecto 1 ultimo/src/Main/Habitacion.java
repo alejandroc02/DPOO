@@ -12,7 +12,7 @@ public class Habitacion {
     private boolean balcon;
     private boolean cocina;
     private ArrayList<Cama> camas;
-    HashMap<LocalDate, Integer> mapaFechas = new HashMap<>();
+    HashMap<LocalDate, Boolean> mapaFechasOcupadas = new HashMap<>();
 
 
     
@@ -26,13 +26,13 @@ public class Habitacion {
         this.cocina = cocina;
         
     }
-    public HashMap<LocalDate, Integer> GetMapaFechas(){
-    	return this.mapaFechas;
+    public HashMap<LocalDate, Boolean> GetMapaFechas(){
+    	return this.mapaFechasOcupadas;
     }
     public void agregarFechaReservada(LocalDate fechaInicio,LocalDate fechaFin) {
     	 LocalDate fecha = fechaInicio;
          while (!fecha.isAfter(fechaFin)) {
-             mapaFechas.put(fecha, 0);
+        	 mapaFechasOcupadas.put(fecha, true);
              fecha = fecha.plusDays(1);
          }
     }

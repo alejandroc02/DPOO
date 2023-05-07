@@ -38,6 +38,16 @@ public class servicio {
 			System.out.println("El servicio no existe ");
 		}
 	}
+	
+	public void editarServicio(String nombre, int precio) {
+		boolean isPresente  = MapaSerivicios.containsKey(nombre);
+		if (isPresente) {
+			MapaSerivicios.replace(nombre, precio);
+			System.out.println("editado correctamente");
+		}else {
+			System.out.println("el servicio no existe");
+		}
+	}
 		
 	}
 	
