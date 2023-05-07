@@ -45,8 +45,13 @@ public class EliminarPlato extends JFrame {
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nombre = textNombre.getText();
-				hotel.EliminarProducto(nombre);
-				JOptionPane.showMessageDialog(null, "Plato eliminado!");
+				boolean hecho=hotel.EliminarProducto(nombre);
+				if (hecho){
+					JOptionPane.showMessageDialog(null, "Plato eliminado!");
+				}else{
+					JOptionPane.showMessageDialog(null, "Plato no existe!");
+				}
+				
 			}
 		});
 		btnConfirmar.setBounds(10, 89, 85, 21);

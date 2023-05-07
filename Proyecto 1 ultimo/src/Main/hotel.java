@@ -546,10 +546,6 @@ public class hotel {
 
 	}
 
-	public void eleminarServicio(String nombre) {
-		Servicio.eliminarServicio(nombre);
-	}
-
 	public Factura solicitarNuevoServicio(String nombre) {
 		Factura factura = new Factura();
 		factura.agregarServicio(nombre);
@@ -603,10 +599,10 @@ public class hotel {
 	public void AgregarProducto(String nombre, int precio, boolean Habitacion) {
 		Restaurante.AgregarProducto(nombre, precio, Habitacion);
 	}
-	public void EliminarProducto(String nombre) {
-		Restaurante.EliminarProducto(nombre);
+	public boolean EliminarProducto(String nombre) {
+		return Restaurante.EliminarProducto(nombre);
 	}
-	public void EliminarServicio(String nombre) {
-		Servicio.eliminarServicio(nombre);
+	public boolean EliminarServicio(String nombre) {
+		return Servicio.eliminarServicio(nombre);
 	}
 }

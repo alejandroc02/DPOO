@@ -40,13 +40,20 @@ public class restaurante {
         } catch (IOException e) {
             e.printStackTrace();}
 	}
-	public void AgregarProducto(String nombre, int precio, boolean habitacion){
+	public AgregarProducto(String nombre, int precio, boolean habitacion){
 		listaMenu.put(nombre, precio);
 		listaMenuAutorizada.put(nombre, habitacion);
 	}
-	public void EliminarProducto(String nombre) {
-		listaMenu.remove(nombre);
-		listaMenuAutorizada.remove(nombre);
+	public boolean EliminarProducto(String nombre) {
+		boolean existe=listaMenu.containsKey(nombre);
+		if(existe){
+			listaMenu.remove(nombre);
+			listaMenuAutorizada.remove(nombre);
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 	
 	public void getMenu() {

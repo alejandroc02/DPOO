@@ -52,13 +52,18 @@ public class AgregarEditarPlato extends JFrame {
 		JButton btnPrecio = new JButton("Confirmar");
 		btnPrecio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nombre = textNombre.getText();
-				int precio = Integer.parseInt(textPrecio.getText());
-				boolean habitacion= chckbxHabitacion.isSelected();
-				hotel.AgregarProducto(nombre, precio, habitacion);
-				JOptionPane.showMessageDialog(null, "Hecho!");
+				if(textPrecio.getText().equals("") || textPrecio.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "COMPLETE TODOS LOS CAMPOS!");
+				}else {
+					String nombre = textNombre.getText();
+					int precio = Integer.parseInt(textPrecio.getText());
+					boolean habitacion= chckbxHabitacion.isSelected();
+					hotel.AgregarProducto(nombre, precio, habitacion);
+					JOptionPane.showMessageDialog(null, "Hecho!");
 			}
+		}
 		});
+		
 		btnPrecio.setBounds(10, 187, 96, 19);
 		contentPane.add(btnPrecio);
 		

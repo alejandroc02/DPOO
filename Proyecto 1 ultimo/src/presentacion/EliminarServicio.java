@@ -45,8 +45,12 @@ public class EliminarServicio extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nombre = textNombre.getText();
-				hotel.EliminarServicio(nombre);
-				JOptionPane.showMessageDialog(null, "Hecho!");
+				boolean hecho=hotel.EliminarServicio(nombre);
+				if (hecho){
+					JOptionPane.showMessageDialog(null, "Hecho!");
+				}else{
+					JOptionPane.showMessageDialog(null,"No existe, intentelo de nuevo");
+				}
 			}
 		});
 		btnNewButton.setBounds(10, 65, 85, 21);
