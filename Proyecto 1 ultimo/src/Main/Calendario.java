@@ -20,6 +20,7 @@ public class Calendario {
     public void registrarEvento(Tarifa tarfia, LocalDate fechaInicio, LocalDate fechaFin) {
         LocalDate fecha = fechaInicio;
         while (!fecha.isAfter(fechaFin)) {
+        	
             List<Tarifa> listaEventos = eventos.getOrDefault(fecha, new ArrayList<>());
             listaEventos.add(tarfia);
             eventos.put(fecha, listaEventos);
@@ -49,11 +50,23 @@ public class Calendario {
         }
     }
     **/
-    public void eliminarEvento(Tarifa tarifa, LocalDate fechaInicio, LocalDate fechaFin) {
+    public void eliminarEvento(String id,LocalDate fechaInicio, LocalDate fechaFin) {
         LocalDate fecha = fechaInicio;
         while (!fecha.isAfter(fechaFin)) {
-            List<Tarifa> listaEventos = eventos.getOrDefault(fecha, new ArrayList<>());
-            listaEventos.removeIf(evento -> evento.equals(tarifa));
+
+        	
+        	List<Tarifa> listaEventos = eventos.getOrDefault(fecha, new ArrayList<>());
+            
+            int o=0;
+        	while(o<=listaEventos.size()) {;
+        		Tarifa tarfiaActual=listaEventos.get(o);
+        		if(tarfiaActual.esId(id)) {
+        			listaEventos.remove(o);
+        		}else {
+        			continue;
+        		}
+        		o+=1;
+        	}
             eventos.put(fecha, listaEventos);
             fecha = fecha.plusDays(1);
         }
@@ -69,7 +82,13 @@ public class Calendario {
         return eventosEnPeriodo;
     }
     
-    public LocalDate obtenerProximaFechaSinEventos(LocalDate fechaInicio, LocalDate fechaFin) {
+    public LocalDate obtenerProximaFechaSinEventos(LocalDate fechaInicio) {
+    	LocalDate fechaFin;
+    	if (fechaInicio.isLeapYear()) {
+    		fechaFin=fechaInicio.plusDays(366);
+    	}else {
+    		fechaFin=fechaInicio.plusDays(365);
+    	}
         LocalDate fecha = LocalDate.now();
         while (!fecha.isAfter(fechaFin)) {
             if (!eventos.containsKey(fecha)) {

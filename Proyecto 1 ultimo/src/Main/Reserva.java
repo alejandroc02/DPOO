@@ -11,23 +11,23 @@ public class Reserva {
 	int cantidadAdultos;
 	int cantidadNinos;
 	static int contadorId;
-	int idReserva;
+	String idReserva;
 	HashMap<Integer,Huesped> MapaHuespedes;
 	boolean Estado;
 	ArrayList<Factura> listaFacturas=new ArrayList<Factura>();
 	Random rand = new Random();
+	int valorOrginialReserva;
 	
-	public Reserva(String fechaCheckin, String fechaCheckout, HashMap<Integer, Habitacion> mapaHabitaciones,
-			int cantidadAdultos, int cantidadNinos,  HashMap<Integer, Huesped> mapaHuespedes) {
+	public Reserva(String idReserva,String fechaCheckin, String fechaCheckout, HashMap<Integer, Habitacion> mapaHabitaciones,
+			int cantidadAdultos, int cantidadNinos,  HashMap<Integer, Huesped> mapaHuespedes ,int valorOrginialReserva) {
 		
 		this.fechaCheckin = fechaCheckin;
 		this.fechaCheckout = fechaCheckout;
 		MapaHabitaciones = mapaHabitaciones;
 		this.cantidadAdultos = cantidadAdultos;
 		this.cantidadNinos = cantidadNinos;
-		int valorRandom=generarID();
-		Reserva.contadorId+=1;
-		this.idReserva = Reserva.contadorId+valorRandom;
+		this.valorOrginialReserva =valorOrginialReserva;
+		this.idReserva = idReserva;
 		MapaHuespedes = mapaHuespedes;
 		this.Estado=false;
 	}
@@ -68,7 +68,7 @@ public class Reserva {
 		return cantidadNinos;
 	}
 
-	public int getIdReserva() {
+	public String getIdReserva() {
 		return idReserva;
 	}
 
@@ -96,7 +96,7 @@ public class Reserva {
 		this.cantidadNinos = cantidadNinos;
 	}
 
-	public void setIdReserva(int idReserva) {
+	public void setIdReserva(String idReserva) {
 		this.idReserva = idReserva;
 	}
 

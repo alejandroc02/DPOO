@@ -1,10 +1,10 @@
 package Main;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
-
-import Persistencia.Plano;
 
 
 
@@ -12,7 +12,6 @@ public class aplicacion {
 	private hotel hotel;
 	private Boolean Autorizacion;
 	private Boolean InicioSesion = false;
-	private Plano plano;
 
 	public aplicacion(){
 		int op;
@@ -54,10 +53,13 @@ public class aplicacion {
 	}
 	
 	private void CargarArchivos() {
-		plano.CargarArchivos();
+		String ArchivoHabitaciones="InventarioHabitaciones.csv";
+		String ArchivoMenu="Empleados.csv";
+		String ArchivoEmpleados="Menu.csv";
+		String ArchivoTarifas="Tarifas.csv";
+		this.hotel=new hotel(ArchivoHabitaciones,ArchivoMenu,ArchivoEmpleados,ArchivoTarifas);
+		
 	}
-	
-	
 	public void EjecutarHabitaciones() { 
 		if (InicioSesion) {
 			Scanner cc = new Scanner(System.in);
@@ -127,7 +129,9 @@ public class aplicacion {
 					int Precio = cc.nextInt();
 					System.out.println("Digite dias semana asi L-M-MI-J-V");
 					String DiasS = cc.next();
-					hotel.agregarTarifa(Fechas, DiasS, Precio, Tipo);
+					System.out.println("Digite Id deseado:");
+					String Id = cc.next();
+					hotel.agregarTarifa(Id,Fechas, DiasS, Precio, Tipo);
 				}
 			}else {
 				
@@ -142,9 +146,10 @@ public class aplicacion {
 	public void EjecutarServicios() {
 		if(InicioSesion) {
 			Scanner cc = new Scanner(System.in);
-			System.out.println("\n1. Consultar Servicios\n2. SolicitarServicio servicio\n3. Pago");
+			System.out.println("\n1. Consultar Servicios\n2. SolicitarNuevoServicio \n3. PagoServicioSolicitado\n4. Agregar servicio\n5. Eliminar servicio");
 			int opcion=cc.nextInt();
 			if(opcion==1) {
+				System.out.println("Los servicios son: ");
 				
 			}else if(opcion==2) {
 				
@@ -212,7 +217,10 @@ public class aplicacion {
 		        int cantidadNinos = scanner.nextInt();
 		        
 		        System.out.print("cuantas habitaciones desea?");
+		        
 		        int cantidadHabtiaciones = scanner.nextInt();
+		        
+		        int totalPersonas=cantidadNinos+cantidadAdultos;
 		        int i=0;
 		        ArrayList<Habitacion> HabitacionesVaforables=new ArrayList<Habitacion>();
 		        while (i<cantidadHabtiaciones) {
@@ -234,20 +242,11 @@ public class aplicacion {
 		        		HabitacionesVaforables.add(habitaion);
 		        	}
 		        	
-		        int w=0;
-		        int  capacidadTotalHabitaciones=0;
-		        while (w<HabitacionesVaforables.size()) {
-		        	Habitacion HabitacionActual=HabitacionesVaforables.get(w);
-		        	int capacidadHab=HabitacionActual.getCapacidad();
-		        	capacidadTotalHabitaciones+=capacidadHab;
-		        }
-		
-		
+		        MapaRespuesta=hotel.encontrarHabitaciones(HabitacionesVaforables, cantidadHabtiaciones, totalPersonas);
 
 		        
-		        }
 		        
-		        int totalPersonas=cantidadNinos+cantidadAdultos;
+		        
 		        int x=0;
 		        HashMap<Integer,Huesped> MapaHuesped=new HashMap<>();
 		        while(x <= totalPersonas) {
@@ -271,8 +270,44 @@ public class aplicacion {
 		        	
 		        	x+=1;
 		        }
+		        boolean Continuar =	false;
+		        System.out.println("Las habitaciones son :");
 		        
+		        for (Habitacion habitacionActual : MapaRespuesta.values()) {
+
+		        	System.out.println("Habitacion numero: "+habitacionActual.getId());
+		        	int total=0;
+		        	LocalDate fechaIN = LocalDate.parse(fechaCheckin);
+		        	LocalDate fehcaOut = LocalDate.parse(fechaCheckout);
+		        	total=hotel.calcularReserva(habitacionActual.getTipo(),fechaIN,fehcaOut);
+		        	System.out.println("Precio por total de dias: "+total);
+		        }
 		        
+		        while(!Continuar) {
+		        	System.out.println("¿Desea continuar con la reserva? (s/n)");
+			        String respuesta = scanner.nextLine();
+			        if (respuesta.equalsIgnoreCase("s")) {
+			            System.out.println("Continuando con la reserva...");
+			            System.out.println("El precio total de la reserva sin servicios es de: ");
+			        	//debe de poder reconcoer los dias de la semana
+			        	//y calcuclar dia por dia
+			            hotel.crearReserva(fechaCheckin, fechaCheckout, tipo, MapaRespuesta, cantidadAdultos, cantidadNinos, MapaHuesped);
+			        } else {
+			            System.out.println("Cancelando la reserva...");
+			        }
+		        }
+		        
+		        System.out.println("¿Desea continuar con la reserva? (s/n)");
+		        String respuesta = scanner.nextLine();
+		        
+		        if (respuesta.equalsIgnoreCase("s")) {
+		            System.out.println("Continuando con la reserva...");
+		        } else {
+		            System.out.println("Cancelando la reserva...");
+		        }
+		        hotel.crearReserva(fechaCheckin, fechaCheckout, tipo, MapaRespuesta, cantidadAdultos, cantidadNinos, MapaHuesped);
+		        
+		        }  
 			}else if(opcion==3) {
 				
 			}else if(opcion==4) {
@@ -315,8 +350,11 @@ public class aplicacion {
 		
 	}
 	
+
+	
 	
 	public static void main(String[] args) {
 		new aplicacion();
 	}
 }
+	

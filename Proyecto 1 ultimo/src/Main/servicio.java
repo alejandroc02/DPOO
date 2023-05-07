@@ -27,10 +27,21 @@ public class servicio {
 	public Boolean isPresenteServicio(String servicio) {
 		Boolean isPresente=MapaSerivicios.containsKey(servicio);
 		return isPresente;
+	}
+	public void agregarServicio(String nombre,int precio){
+		MapaSerivicios.put(nombre, precio);
+	}
+	public void eliminarServicio(String nombre) {
+		if(this.isPresenteServicio(nombre)) {
+			MapaSerivicios.remove(nombre);
+		}else {
+			System.out.println("El servicio no existe ");
+		}
+	}
 		
 	}
 	
-	}
+	
 	
 
 
