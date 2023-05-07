@@ -11,6 +11,7 @@ public class Habitacion {
     private boolean vista;
     private boolean balcon;
     private boolean cocina;
+	private boolean ocupada;
     private ArrayList<Cama> camas;
     HashMap<LocalDate, Integer> mapaFechas = new HashMap<>();
 
@@ -24,8 +25,9 @@ public class Habitacion {
         this.vista = vista;
         this.balcon = balcon;
         this.cocina = cocina;
-        
-    }
+		this.ocupada = ocupada;
+	}
+
     public HashMap<LocalDate, Integer> GetMapaFechas(){
     	return this.mapaFechas;
     }
@@ -39,6 +41,8 @@ public class Habitacion {
     public int getId() {
 		return id;
 	}
+	public boolean estaOcupada() {
+        return ocupada; }
 
 
 	public void setId(int id) {
@@ -104,7 +108,22 @@ public class Habitacion {
 	public void setCocina(boolean cocina) {
 		this.cocina = cocina;
 	}
+
+	public boolean isOcupada() {
+		return ocupada;
+	}
+
+	private ArrayList<Habitacion> habitaciones;
+    public boolean consultarOcupacion(int id) {
+        for (Habitacion habitacion : habitaciones) {
+             if (habitacion.getId() == id) {
+                 return habitacion.estaOcupada();
+                }
+            }
+            // si no se encuentra la habitación con el ID especificado, se devuelve false
+            return false; }}
+
     
     
-    }
+    
 

@@ -217,6 +217,23 @@ public class hotel {
 
 	}
 
+
+	public Habitacion consultarhabitacion(int id, String tipo) {
+		Boolean ispresenteTipo=Habitaciones.containsKey(tipo);
+	   if(ispresenteTipo) {
+		   ArrayList<Habitacion> listaHabitacionesActuales=Habitaciones.get(tipo);
+		   for (Habitacion habitacionActual : listaHabitacionesActuales) {
+			   int idHabitacionActual =habitacionActual.getId();
+			   if(idHabitacionActual==id) {
+				   return habitacionActual;
+			   }
+		   }
+	   }
+	   return null;
+
+	   
+   }
+
 	public String consultarHabitacion(int id, String tipo) {
 		Boolean ispresenteTipo = Habitaciones.containsKey(tipo);
 		if (ispresenteTipo) {
@@ -235,6 +252,18 @@ public class hotel {
 			}
 		}
 		return null;
+
+        }
+
+		private ArrayList<Habitacion> habitaciones;
+    public boolean consultarOcupacion(int id) {
+        for (Habitacion habitacion : habitaciones) {
+             if (habitacion.getId() == id) {
+                 return habitacion.estaOcupada();
+                }
+            }
+            // si no se encuentra la habitación con el ID especificado, se devuelve false
+            return false;
 	}
 	/*
 	 * EMPIEZA SECCION TARIFAS
