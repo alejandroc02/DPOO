@@ -33,7 +33,7 @@ public class AgregarTarifa extends JFrame {
 	 * @param hotel 
 	 */
 	public AgregarTarifa(hotel hotel) {
-		setTitle("Agregar Tarifas");
+		setTitle("Agregar o Editar tarifas");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 364);
 		contentPane = new JPanel();
