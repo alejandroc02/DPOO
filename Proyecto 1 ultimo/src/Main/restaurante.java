@@ -40,7 +40,7 @@ public class restaurante {
         } catch (IOException e) {
             e.printStackTrace();}
 	}
-	public AgregarProducto(String nombre, int precio, boolean habitacion){
+	public void AgregarProducto(String nombre, int precio, boolean habitacion){
 		listaMenu.put(nombre, precio);
 		listaMenuAutorizada.put(nombre, habitacion);
 	}
