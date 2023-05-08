@@ -1,0 +1,5 @@
+User: Admin
+Pass: Admin
+
+User: Empleado
+Pass: Empleado
