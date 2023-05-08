@@ -13,7 +13,8 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class hotel {
-
+	
+	private Boolean pedidoEnCursoRes=false;
 	private static final String String = null;
 	private HashMap<String, ArrayList<Habitacion>> Habitaciones = new HashMap<String, ArrayList<Habitacion>>();//
 	private HashMap<String, String> listaPersonal = new HashMap<String, String>();// hashMap donde el valor es el
@@ -270,7 +271,7 @@ public class hotel {
 	 * EMPIEZA SECCION TARIFAS
 	 * 
 	 */
-
+    
 	public void agregarTarifa(String id, String Fecha, String diasDeLaSemana, int precio, String tipo) {
 
 		Boolean isPresente = listaTarifa.containsKey(tipo);// ya existe ese tipo de habitacion ?
@@ -376,7 +377,7 @@ public class hotel {
 		}
 	}
 
-	public void consultarReserva(int id) {
+	public void consultarReserva(String id) {
 		boolean isPresenteReserva = mapaReserva.containsKey(id);
 		if (isPresenteReserva) {
 			Reserva ReservaActual = mapaReserva.get(id);
@@ -446,7 +447,7 @@ public class hotel {
 			System.out.println("el tipo de habtiacion no es valdios");
 		}
 
-		return null;
+		return MapaRespuesta;
 
 	}
 
@@ -530,8 +531,8 @@ public class hotel {
 	public void crearReserva(String idReserva, String fechaCheckin, String fechaCheckout,
 			HashMap<Integer, Habitacion> mapaHabitaciones,
 			int cantidadAdultos, int cantidadNinos, HashMap<Integer, Huesped> mapaHuespedes) {
-		// Reserva reservaActual = new Reserva();//AQUIIIVOY
-
+		Reserva reservaActual = new Reserva(fechaCheckout, fechaCheckout, fechaCheckout, mapaHabitaciones, cantidadNinos, cantidadNinos, mapaHuespedes, cantidadNinos);//AQUIIIVOY
+		mapaReserva.put(idReserva, reservaActual);
 	}
 	// podemos agregar funcion para que cargue un archivo
 	// la funcion consultarServicios podria retornar el mapa si es necesario, es
@@ -605,5 +606,122 @@ public class hotel {
 	}
 	public boolean EliminarServicio(String nombre) {
 		return Servicio.eliminarServicio(nombre);
+	}
+	
+	public void checkIn(String idReserva) {
+		boolean isPresente=mapaReserva.containsKey(idReserva);
+		if(isPresente) {
+			Scanner cc = new Scanner(System.in);
+			System.out.println("La reserva existe");
+			this.consultarReserva(idReserva);
+			System.out.println("Confirmar?(SI/NO)");
+			String respuesta=cc.nextLine();
+			if(respuesta.equals("SI")) {
+				Reserva reservaCheckIn = mapaReserva.get(idReserva);
+				reservaCheckIn.Estado=true;
+				System.out.println("Check in exitoso");
+			}else if(respuesta.equals("NO")){
+				System.out.println("Nueva reserva ?(SI/NO)" );
+				String respuesta2=cc.nextLine();
+				if(respuesta2.equals("SI")) {
+					//pedir datos otra vez
+					this.crearReserva(idReserva, respuesta, respuesta2, null, 0, 0, mapaHuesped);
+				}else {
+					//reiniciar?
+				}
+			}else {
+				System.out.print("opcion no valida");
+			}
+			
+		}else {
+			
+		}
+		
+	}
+	public void checkOut(String idReserva) {
+		boolean isPresente=mapaReserva.containsKey(idReserva);
+		int totalFacturas=0;
+		Scanner cc = new Scanner(System.in);
+		if (isPresente) {
+			Reserva reservaActual=mapaReserva.get(idReserva);
+			ArrayList<Factura> listaFcaturaActual=reservaActual.getListaFacturas();
+			for(Factura facturaActual:listaFcaturaActual) {
+				if(facturaActual.isEstaPago()) {
+					continue;
+				}else {
+					totalFacturas+=facturaActual.obtenerTotal();
+				}	
+			}
+			if(totalFacturas==0) {
+				System.out.println("Ya pago todas las facturas solo paga reserva");
+				System.out.println("valor a pagar solo de reserva" +reservaActual.valorOrginialReserva);
+				System.out.println("Digite PAGAR");
+				String res = cc.nextLine();
+				if(res.equals("PAGAR")) {
+					reservaActual.Estado=false;
+					System.out.println("pagado");
+				}else {
+					System.out.println("error opcion no valida");
+				}
+				
+			}else {
+				totalFacturas+=reservaActual.valorOrginialReserva;
+				System.out.println("valor a pagar solo de reserva" +totalFacturas);
+				System.out.println("Digite PAGAR");
+				String res2 = cc.nextLine();
+				if(res2.equals("PAGAR")) {
+					reservaActual.Estado=false;
+					System.out.println("pagado");
+				}else {
+					System.out.println("error opcion no valida");
+				}
+				
+			}
+			
+			
+		}else {
+			System.out.println("id incorrecto");
+		}
+		
+	}
+	
+	public void crearPedidoRestaruante(Boolean respuestapedido) {
+
+		this.pedidoEnCursoRes=true;
+		Restaurante.crearPedido(respuestapedido);
+		
+	}
+	public void agregarApedidoRestaruante(String producto) {
+		if(this.pedidoEnCursoRes) {
+			Restaurante.agregarAPedido(producto);
+		}else {
+			System.out.println("no hay pedido en curso");
+		}
+	}
+	
+	public void eleminiarApedidoRes(String prodcuto) {
+		if(this.pedidoEnCursoRes) {
+			Restaurante.eliminarAPedido(prodcuto);
+		}else {
+			System.out.println("no hay pedido en curso");
+		}
+	}
+	public int totalPagarPedido() {
+		if(this.pedidoEnCursoRes) {
+			return Restaurante.totalPagaPedido();
+		}else {
+			System.out.println("no hay pedido en curso");
+		}
+		return 0;
+		
+	}
+	public void finalizarPedidoEncurso(){
+		if(this.pedidoEnCursoRes) {
+			this.pedidoEnCursoRes=false;
+			Restaurante.finalizarPedido();
+		}else {
+			System.out.println("no hay pedido en curso");
+		}
+		
 	}
 }

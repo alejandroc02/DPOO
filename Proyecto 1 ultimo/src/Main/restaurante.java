@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class restaurante {
 	private HashMap<String,Integer> listaMenu= new HashMap<String,Integer>();// Hashmap donde la llave es el producto y el valor es el valor del producto
 	private HashMap<String,Boolean> listaMenuAutorizada= new HashMap<String,Boolean>();//HashMap en donde tiene por llave el nombre del producto y como valor si esta autorizado para ir a la habitacion
-	public Pedido pedido;
+	public Pedido pedido=null;
 	
 	
 	
@@ -78,8 +78,13 @@ public class restaurante {
 		}
 	}
 
-	public void crearPedido(boolean Hab) {
-		pedido= new Pedido(Hab);
+	public void crearPedido(Boolean Hab) {
+		if(pedido!=null) {
+			pedido= new Pedido(Hab);
+		}else {
+			System.out.println("pedido en curso");
+		}
+		
 		
 	}
 	public void agregarAPedido(String Producto) {
@@ -108,10 +113,16 @@ public class restaurante {
 			 System.out.println("El producto nunca fue agregado al pedido o se escribio incorrectamente el nombre del producto");
 		 }
 	    }
-	 public void finalizarPedido() {
+	 
+	 public  void finalizarPedido() {
+		 pedido=null;
+		
+	 }
+	 
+	 public int totalPagaPedido() {
 		 HashMap<String,Integer> pedidoAFinalizar=this.pedido.GetPedido();
 		 System.out.println("Su pedido es");
-		 Integer totalAPagar=0;
+		 int totalAPagar=0;
 		 Iterator<Map.Entry<String,Integer>> iterador = pedidoAFinalizar.entrySet().iterator();
 			while(iterador.hasNext()) {
 				Map.Entry<String, Integer> entry=iterador.next();
@@ -121,7 +132,7 @@ public class restaurante {
 				totalAPagar+=precio;
 			}
 		System.out.println("El total a pagar es "+ totalAPagar);
-		pedido=null;
+		return totalAPagar;
 	 }
 
 

@@ -40,6 +40,9 @@ public class Reserva {
 	public void agregarFactura(Factura factura) {
 		this.listaFacturas.add(factura);
 	}
+	public ArrayList<Factura> getListaFacturas(){
+		return this.listaFacturas;
+	}
 	public boolean getEstado() {
 		return Estado;
 	}
