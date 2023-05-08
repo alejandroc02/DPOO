@@ -7,9 +7,8 @@ public class Plano {
 	public void CargarArchivos() {
 		String ArchivoHabitaciones="InventarioHabitaciones.csv";
 		String ArchivoMenu="Menu.csv";
-		String ArchivoEmpleados="Empleados.csv";
 		String ArchivoTarifas="Tarifas.csv";
 		String ArchivoServicios="Servicios.csv";
-		this.hotel=new hotel(ArchivoHabitaciones,ArchivoMenu,ArchivoEmpleados,ArchivoTarifas, ArchivoServicios);
+		this.hotel=new hotel(ArchivoHabitaciones,ArchivoMenu,ArchivoTarifas, ArchivoServicios);
 	}
 }

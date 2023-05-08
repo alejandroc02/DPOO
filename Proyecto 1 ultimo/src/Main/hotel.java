@@ -19,11 +19,7 @@ public class hotel {
 	private HashMap<String, String> listaPersonal = new HashMap<String, String>();// hashMap donde el valor es el
 																					// usuario del empleado y el valor
 																					// la contrasena
-	private HashMap<String, Boolean> listaPersonalAutorizado = new HashMap<String, Boolean>();// HashMap en donde tiene
-																								// por llave el nombre
-																								// del empelado y como
-																								// valor si esta
-																								// autorizado
+	
 	private HashMap<String, Calendario> listaTarifa = new HashMap<>();// Hashmap en donde la llave es el tipo y el valor
 																		// otro hashmap en donde la llave es la fecha de
 																		// la tarifa y el valor es una Tarif
@@ -31,14 +27,14 @@ public class hotel {
 	private HashMap<String, Reserva> mapaReserva = new HashMap<>();
 	private servicio Servicio = new servicio();
 	private restaurante Restaurante;
-	public hotel(String ArchivoHabitaciones, String ArchivoMenu, String ArchivoEmpleados, String ArchivoTarifas,
+	public hotel(String ArchivoHabitaciones, String ArchivoMenu, String ArchivoTarifas,
 			String ArchivoServicios) {
-		this.CargarArchivos(ArchivoHabitaciones, ArchivoMenu, ArchivoEmpleados, ArchivoTarifas, ArchivoServicios);
+		this.CargarArchivos(ArchivoHabitaciones, ArchivoMenu, ArchivoTarifas, ArchivoServicios);
 		this.Restaurante=new restaurante(ArchivoMenu);
 
 	}
 
-	private void CargarArchivos(String ArchivoHabitaciones, String ArchivoMenu, String ArchivoEmpleados,
+	private void CargarArchivos(String ArchivoHabitaciones, String ArchivoMenu, 
 			String ArchivoTarifas, String ArchivoServicios) {
 		String line = "";
 		String line3 = "";
@@ -79,26 +75,7 @@ public class hotel {
 			e.printStackTrace();
 		}
 
-		try (BufferedReader br = new BufferedReader(new FileReader("Datos/" + ArchivoEmpleados))) {
-			boolean Check3 = true;
-
-			while ((line3 = br.readLine()) != null) {
-				if (Check3) {
-
-					Check3 = false;
-					continue;
-				}
-
-				String[] fields = line3.split(cvsSplitBy);
-
-				listaPersonal.put(fields[0], fields[1]);
-				listaPersonalAutorizado.put(fields[0], Boolean.parseBoolean(fields[2]));
-
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 
 		try (BufferedReader br = new BufferedReader(new FileReader("Datos/" + ArchivoTarifas))) {
 			boolean Check4 = true;
@@ -170,10 +147,6 @@ public class hotel {
 			e.printStackTrace();
 		}
 
-	}
-
-	public HashMap<String, Boolean> consultarPersonalAutorizado() {
-		return this.listaPersonalAutorizado;
 	}
 
 	public HashMap<String, String> consultarPersonal() {
