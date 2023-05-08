@@ -1,0 +1,6 @@
+﻿Tipo,FechaInicio,Tarifa,DiasSemana,ID
+Estandar,06/01/2023-06/05/2023,100,D-L-M,1
+Suite,06/03/2023-06/08/2023,200,M-MI,2
+Estandar,06/06/2023-06/09/2023,120,L-MI-V,3
+Suite doble,06/07/2023-06/12/2023,250,V-S-D,4
+Estandar,06/10/2023-06/12/2023,110,L-M-MI-J-V,5
