@@ -96,7 +96,7 @@ public class AgregarHuesped extends JFrame {
 		lblNewLabel_2.setBounds(10, 116, 45, 13);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Fecha");
+		JLabel lblNewLabel_3 = new JLabel("Digite fecha asi dd/MM/yyyyInicial-dd/MM/yyyyFinal");
 		lblNewLabel_3.setBounds(10, 174, 76, 13);
 		contentPane.add(lblNewLabel_3);
 		
@@ -123,7 +123,7 @@ public class AgregarHuesped extends JFrame {
 				}else {
 					String Nombre= textNombre.getText();
 					int ID = Integer.parseInt(textID.getText());
-					int Telefono = Integer.parseInt(textID.getText());
+					int Telefono = Integer.parseInt(textTelefono.getText());
 					String Fecha = textFecha.getText();
 					String tipo = textTipo.getText();
 					int adultos = Integer.parseInt(textadultos.getText());

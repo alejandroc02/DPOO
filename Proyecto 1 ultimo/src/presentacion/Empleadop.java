@@ -10,7 +10,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import Main.hotel;
 import Persistencia.Plano;
 
@@ -85,4 +100,59 @@ public class Empleadop extends JFrame {
 		btnConsultarHabitacion.setBounds(62, 180, 300, 28);
 		contentPane.add(btnConsultarHabitacion);
 	}
-}
+
+	public class TablaOcupacion extends JFrame {
+
+		private JTable tabla;
+		private DefaultTableModel modelo;
+	
+		public TablaOcupacion() {
+			super("Tabla de Ocupacion");
+			setSize(500, 500);
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+			Container container = getContentPane();
+			container.setLayout(new BorderLayout());
+	
+			String[] columnas = { "Fecha", "ID" };
+			modelo = new DefaultTableModel(columnas, 0);
+	
+			tabla = new JTable(modelo);
+			JScrollPane scroll = new JScrollPane(tabla);
+			container.add(scroll, BorderLayout.CENTER);
+	
+			List<LocalDate> fechas = new ArrayList<>();
+			fechas.add(LocalDate.of(2023, 5, 1));
+			fechas.add(LocalDate.of(2023, 5, 2));
+			fechas.add(LocalDate.of(2023, 5, 3));
+			fechas.add(LocalDate.of(2023, 5, 4));
+			fechas.add(LocalDate.of(2023, 5, 5));
+	
+			List<Integer> ids = new ArrayList<>();
+			ids.add(1);
+			ids.add(2);
+			ids.add(3);
+			ids.add(4);
+			ids.add(5);
+	
+			for (LocalDate fecha : fechas) {
+				for (int id : ids) {
+					Object[] fila = { fecha, id };
+					modelo.addRow(fila);
+				}
+			}
+	
+			setVisible(true);
+		}}}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
