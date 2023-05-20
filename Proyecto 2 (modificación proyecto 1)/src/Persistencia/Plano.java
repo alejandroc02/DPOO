@@ -9,6 +9,7 @@ public class Plano {
 		String ArchivoMenu="Menu.csv";
 		String ArchivoTarifas="Tarifas.csv";
 		String ArchivoServicios="Servicios.csv";
-		this.hotel=new hotel(ArchivoHabitaciones,ArchivoMenu,ArchivoTarifas, ArchivoServicios);
+		String ArchivoUsuarios="Usuarios.csv";
+		this.hotel=new hotel(ArchivoHabitaciones,ArchivoMenu,ArchivoTarifas, ArchivoServicios, ArchivoUsuarios);
 	}
 }

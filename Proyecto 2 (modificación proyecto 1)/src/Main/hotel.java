@@ -27,20 +27,22 @@ public class hotel {
 	private HashMap<Integer, Huesped> mapaHuesped = new HashMap<>();
 	private HashMap<String, Reserva> mapaReserva = new HashMap<>();
 	private servicio Servicio = new servicio();
+	private Usuario usuario1 = new Usuario();
 	private restaurante Restaurante;
 	public hotel(String ArchivoHabitaciones, String ArchivoMenu, String ArchivoTarifas,
-			String ArchivoServicios) {
-		this.CargarArchivos(ArchivoHabitaciones, ArchivoMenu, ArchivoTarifas, ArchivoServicios);
+			String ArchivoServicios, String ArchivoUsuarios) {
+		this.CargarArchivos(ArchivoHabitaciones, ArchivoMenu, ArchivoTarifas, ArchivoServicios, ArchivoUsuarios);
 		this.Restaurante=new restaurante(ArchivoMenu);
 
 	}
 
 	private void CargarArchivos(String ArchivoHabitaciones, String ArchivoMenu, 
-			String ArchivoTarifas, String ArchivoServicios) {
+			String ArchivoTarifas, String ArchivoServicios, String ArchivoUsuarios) {
 		String line = "";
 		String line3 = "";
 		String line4 = "";
 		String line5 = "";
+		String line6 ="";
 		String cvsSplitBy = ",";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader("Datos/" + ArchivoHabitaciones))) {
@@ -147,7 +149,39 @@ public class hotel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		try (BufferedReader br = new BufferedReader(new FileReader("Datos/" + ArchivoUsuarios))) {
+			boolean Check6 = true;
 
+			while ((line6 = br.readLine()) != null) {
+				if (Check6) {
+
+					Check6 = false;
+					continue;
+				}
+
+				String[] fields = line6.split(cvsSplitBy);
+				if (fields.length < 1) {
+					continue;
+				}
+
+				String usuario = fields[0];
+				String contraseña = fields[1];
+				usuario1.CrearUsuario(usuario, contraseña);
+
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public boolean crearUsuario(String usuario, String contraseña) {
+		return usuario1.CrearUsuario(usuario, contraseña);
+	}
+	
+	public boolean verificarUsuario(String usuario, String contraseña) {
+		return usuario1.VerificarUsuario(usuario, contraseña);
 	}
 
 	public HashMap<String, String> consultarPersonal() {
