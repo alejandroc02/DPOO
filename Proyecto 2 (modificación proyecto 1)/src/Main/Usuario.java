@@ -1,7 +1,10 @@
 package Main;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Usuario {
 	public HashMap<String,ArrayList<String>> MapaUsuarios=new HashMap<>();
@@ -28,5 +31,33 @@ public class Usuario {
 		}else {
 			return false;
 		}
+	}
+	
+	public ArrayList<String> consultarFechas(String fechaInicial, String fechaFinal, ArrayList<Habitacion> habitaciones){
+		ArrayList<String> respuesta= new ArrayList<>();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate fechaInicio = LocalDate.parse(fechaInicial, formatter);
+		LocalDate fechafin = LocalDate.parse(fechaFinal, formatter);
+		HashMap<LocalDate, Boolean> fechasOcupadas = new HashMap<LocalDate, Boolean>();
+		for (Habitacion habitacionactual:habitaciones) {
+			fechasOcupadas=habitacionactual.GetMapaFechas();
+			Set<LocalDate> conjuntoclaves=fechasOcupadas.keySet();
+			ArrayList<LocalDate> listaClaves = new ArrayList<>(conjuntoclaves);
+			if (listaClaves.size()==0){
+				String añadir="ID "+habitacionactual.getId()+", Tipo: "+habitacionactual.getTipo()+
+                		", Capacidad: "+habitacionactual.getCapacidad()+", Ubicación: "+habitacionactual.getUbicacion();
+				respuesta.add(añadir);
+			}else{
+			LocalDate fechaInicial2=listaClaves.get(0);
+			LocalDate fechaFinal2=listaClaves.get(listaClaves.lastIndexOf(listaClaves));
+			if (!(fechaInicial2.isAfter(fechaInicio) && fechaFinal2.isBefore(fechafin))) {
+                String añadir="ID "+habitacionactual.getId()+", Tipo: "+habitacionactual.getTipo()+
+                		", Capacidad: "+habitacionactual.getCapacidad()+", Ubicación: "+habitacionactual.getUbicacion();
+                respuesta.add(añadir);
+            }
+			}
+		}
+		return respuesta;
+		
 	}
 }

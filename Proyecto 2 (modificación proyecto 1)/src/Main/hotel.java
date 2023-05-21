@@ -17,6 +17,7 @@ public class hotel {
 	private static final String String = null;
 	boolean pedidoEnCursoRes = false;
 	private HashMap<String, ArrayList<Habitacion>> Habitaciones = new HashMap<String, ArrayList<Habitacion>>();//
+	private ArrayList<Habitacion> ListaHabitaciones = new ArrayList<Habitacion>();
 	private HashMap<String, String> listaPersonal = new HashMap<String, String>();// hashMap donde el valor es el
 																					// usuario del empleado y el valor
 																					// la contrasena
@@ -65,11 +66,13 @@ public class hotel {
 					ArrayList<Habitacion> listaHabitacionesActuales = Habitaciones.get(fields[1]);
 					listaHabitacionesActuales.add(HabitacionActual);
 					Habitaciones.put(fields[1], listaHabitacionesActuales);
+					ListaHabitaciones.addAll(listaHabitacionesActuales);
 
 				} else {
 					ArrayList<Habitacion> listaHabitaciones = new ArrayList<Habitacion>();
-					listaHabitaciones.add(HabitacionActual);
+					ListaHabitaciones.add(HabitacionActual);
 					Habitaciones.put(fields[1], listaHabitaciones);
+
 				}
 
 			}
@@ -182,6 +185,11 @@ public class hotel {
 	
 	public boolean verificarUsuario(String usuario, String contraseña) {
 		return usuario1.VerificarUsuario(usuario, contraseña);
+	}
+	
+	public ArrayList<String> consultarFechas(String fechaInicio, String fechaFinal){
+		return usuario1.consultarFechas(fechaInicio, fechaFinal, ListaHabitaciones);
+		
 	}
 
 	public HashMap<String, String> consultarPersonal() {

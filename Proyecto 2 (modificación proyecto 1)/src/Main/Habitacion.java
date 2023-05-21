@@ -120,7 +120,10 @@ public class Habitacion {
                 }
             }
             // si no se encuentra la habitación con el ID especificado, se devuelve false
-            return false; }}
+            return false; 
+            }
+    
+    }
 
     
     
