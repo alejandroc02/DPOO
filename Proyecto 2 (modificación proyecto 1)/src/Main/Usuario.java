@@ -48,13 +48,13 @@ public class Usuario {
                 		", Capacidad: "+habitacionactual.getCapacidad()+", Ubicación: "+habitacionactual.getUbicacion();
 				respuesta.add(añadir);
 			}else{
-			LocalDate fechaInicial2=listaClaves.get(0);
-			LocalDate fechaFinal2=listaClaves.get(listaClaves.lastIndexOf(listaClaves));
-			if (!(fechaInicial2.isAfter(fechaInicio) && fechaFinal2.isBefore(fechafin))) {
-                String añadir="ID "+habitacionactual.getId()+", Tipo: "+habitacionactual.getTipo()+
-                		", Capacidad: "+habitacionactual.getCapacidad()+", Ubicación: "+habitacionactual.getUbicacion();
-                respuesta.add(añadir);
-            }
+				LocalDate fechaFinal2=listaClaves.get(0);
+				LocalDate fechaInicial2=listaClaves.get(listaClaves.size()-1);
+				if (!(fechaInicial2.isAfter(fechaInicio) && fechaFinal2.isBefore(fechafin))) {
+                	String añadir="ID "+habitacionactual.getId()+", Tipo: "+habitacionactual.getTipo()+
+                			", Capacidad: "+habitacionactual.getCapacidad()+", Ubicación: "+habitacionactual.getUbicacion();
+                	respuesta.add(añadir);
+            	}
 			}
 		}
 		return respuesta;

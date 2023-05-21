@@ -30,12 +30,13 @@ public class Habitacion {
     public HashMap<LocalDate, Boolean> GetMapaFechas(){
     	return this.mapaFechasOcupadas;
     }
-    public void agregarFechaReservada(LocalDate fechaInicio,LocalDate fechaFin) {
+    public boolean agregarFechaReservada(LocalDate fechaInicio,LocalDate fechaFin) {
     	 LocalDate fecha = fechaInicio;
          while (!fecha.isAfter(fechaFin)) {
         	 mapaFechasOcupadas.put(fecha, true);
              fecha = fecha.plusDays(1);
          }
+		 return true;
     }
     public int getId() {
 		return id;

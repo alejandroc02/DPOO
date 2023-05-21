@@ -44,6 +44,12 @@ public class Usuariop extends JFrame {
 		contentPane.add(btnConsultar);
 		
 		JButton btnReservar = new JButton("Reservar");
+		btnReservar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Reservar p = new Reservar(hotel);
+				p.setVisible(true);
+			}
+		});
 		btnReservar.setBounds(24, 114, 157, 33);
 		contentPane.add(btnReservar);
 	}

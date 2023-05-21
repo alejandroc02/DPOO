@@ -33,6 +33,7 @@ public class ConsultarFechas extends JFrame {
 	private JTextField textFinal;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
+	private JButton btnLimpiar;
 	
 	/**
 	 * Launch the application.
@@ -64,7 +65,7 @@ public class ConsultarFechas extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(313, 74, 85, 21);
+		btnNewButton.setBounds(244, 74, 102, 21);
 		contentPane.add(btnNewButton);
 		
 		textFechas = new JTextField();
@@ -81,7 +82,7 @@ public class ConsultarFechas extends JFrame {
         contentPane.add(scrollPane);
 		
 		JLabel lblNewLabel = new JLabel("Fechas a consultar dd/MM/yyyy");
-		lblNewLabel.setBounds(278, 10, 154, 13);
+		lblNewLabel.setBounds(261, 10, 190, 13);
 		contentPane.add(lblNewLabel);
 		
 		textFinal = new JTextField();
@@ -90,12 +91,21 @@ public class ConsultarFechas extends JFrame {
 		textFinal.setColumns(10);
 		
 		lblNewLabel_1 = new JLabel("Fecha inicio");
-		lblNewLabel_1.setBounds(203, 33, 71, 13);
+		lblNewLabel_1.setBounds(203, 33, 94, 13);
 		contentPane.add(lblNewLabel_1);
 		
 		lblNewLabel_2 = new JLabel("Fecha final");
-		lblNewLabel_2.setBounds(359, 33, 71, 13);
+		lblNewLabel_2.setBounds(359, 33, 106, 13);
 		contentPane.add(lblNewLabel_2);
+		
+		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listModel.clear();
+			}
+		});
+		btnLimpiar.setBounds(356, 74, 109, 21);
+		contentPane.add(btnLimpiar);
 		
 
 	}
