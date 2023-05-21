@@ -17,6 +17,7 @@ public class hotel {
 	private static final String String = null;
 	boolean pedidoEnCursoRes = false;
 	private HashMap<String, ArrayList<Habitacion>> Habitaciones = new HashMap<String, ArrayList<Habitacion>>();//
+	private ArrayList<Habitacion> ListaHabitaciones = new ArrayList<Habitacion>();
 	private HashMap<String, String> listaPersonal = new HashMap<String, String>();// hashMap donde el valor es el
 																					// usuario del empleado y el valor
 																					// la contrasena
@@ -67,11 +68,13 @@ public class hotel {
 					ArrayList<Habitacion> listaHabitacionesActuales = Habitaciones.get(fields[1]);
 					listaHabitacionesActuales.add(HabitacionActual);
 					Habitaciones.put(fields[1], listaHabitacionesActuales);
+					ListaHabitaciones.addAll(listaHabitacionesActuales);
 
 				} else {
 					ArrayList<Habitacion> listaHabitaciones = new ArrayList<Habitacion>();
-					listaHabitaciones.add(HabitacionActual);
+					ListaHabitaciones.add(HabitacionActual);
 					Habitaciones.put(fields[1], listaHabitaciones);
+
 				}
 
 			}
@@ -184,6 +187,24 @@ public class hotel {
 	
 	public boolean verificarUsuario(String usuario, String contraseña) {
 		return usuario1.VerificarUsuario(usuario, contraseña);
+	}
+	
+	public ArrayList<String> consultarFechas(String fechaInicio, String fechaFinal){
+		return usuario1.consultarFechas(fechaInicio, fechaFinal, ListaHabitaciones);
+	}
+
+	public boolean reserva(String fechaInicio, String fechaFin, int id){
+		boolean confirmar= false;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate fechainicial = LocalDate.parse(fechaInicio, formatter);
+		LocalDate fechafinal = LocalDate.parse(fechaFin, formatter);
+		for (Habitacion habitacionact:ListaHabitaciones){
+			int idact=habitacionact.getId();
+			if (idact==id){
+				confirmar=habitacionact.agregarFechaReservada(fechainicial, fechafinal);
+			}
+		}
+		return confirmar;
 	}
 
 	public HashMap<String, String> consultarPersonal() {
@@ -536,13 +557,6 @@ public class hotel {
 
 		return respuesta;
 	}
-
-	public void crearReserva(String idReserva, String fechaCheckin, String fechaCheckout,
-			HashMap<Integer, Habitacion> mapaHabitaciones,
-			int cantidadAdultos, int cantidadNinos, HashMap<Integer, Huesped> mapaHuespedes) {
-		// Reserva reservaActual = new Reserva();//AQUIIIVOY
-
-	}
 	// podemos agregar funcion para que cargue un archivo
 	// la funcion consultarServicios podria retornar el mapa si es necesario, es
 	// facil el arrreglo
@@ -615,36 +629,7 @@ public class hotel {
 	public boolean EliminarServicio(String nombre) {
 		return Servicio.eliminarServicio(nombre);
 	}
-	public void checkIn(java.lang.String idReserva) {
-		boolean isPresente=mapaReserva.containsKey(idReserva);
-		if(isPresente) {
-			Scanner cc = new Scanner(System.in);
-			System.out.println("La reserva existe");
-			this.consultarReserva(idReserva);
-			System.out.println("Confirmar?(SI/NO)");
-			String respuesta=cc.nextLine();
-			if(respuesta.equals("SI")) {
-				Reserva reservaCheckIn = mapaReserva.get(idReserva);
-				reservaCheckIn.Estado=true;
-				System.out.println("Check in exitoso");
-			}else if(respuesta.equals("NO")){
-				System.out.println("Nueva reserva ?(SI/NO)" );
-				String respuesta2=cc.nextLine();
-				if(respuesta2.equals("SI")) {
-					//pedir datos otra vez
-					this.crearReserva(idReserva, respuesta, respuesta2, null, 0, 0, mapaHuesped);
-				}else {
-					//reiniciar?
-				}
-			}else {
-				System.out.print("opcion no valida");
-			}
-			
-		}else {
-			
-		}
-		
-	}
+	
 	public void checkOut(String idReserva) {
 		boolean isPresente=mapaReserva.containsKey(idReserva);
 		int totalFacturas=0;

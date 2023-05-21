@@ -95,7 +95,7 @@ public class LoginHuesped extends JFrame {
 				if (confirmar) {
 					dispose();
 					JOptionPane.showMessageDialog(null, "Bienvenido", "INGRESASTE", JOptionPane.INFORMATION_MESSAGE);
-					Usuariop p = new Usuariop();
+					Usuariop p = new Usuariop(hotel);
 					p.setVisible(true);
 				}else {
 					JOptionPane.showMessageDialog(null, "Error, usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);

@@ -7,28 +7,34 @@ import java.util.Random;
 public class Reserva {
 	String fechaCheckin;
 	String fechaCheckout;
-	HashMap<Integer,Habitacion> MapaHabitaciones;
+	String nombre;
+	String idReserva;
+	String edadPrincipal;
 	int cantidadAdultos;
 	int cantidadNinos;
+	String idhabitacion;
+	//Información acompañantes
+	String nombre1;
+	String nombre2;
+	String nombre3;
+	int valorOrginialReserva;
+
+	HashMap<Integer,Habitacion> MapaHabitaciones;
 	static int contadorId;
-	String idReserva;
 	HashMap<Integer,Huesped> MapaHuespedes;
 	boolean Estado;
 	ArrayList<Factura> listaFacturas=new ArrayList<Factura>();
 	Random rand = new Random();
-	int valorOrginialReserva;
 	
-	public Reserva(String idReserva,String fechaCheckin, String fechaCheckout, HashMap<Integer, Habitacion> mapaHabitaciones,
-			int cantidadAdultos, int cantidadNinos,  HashMap<Integer, Huesped> mapaHuespedes ,int valorOrginialReserva) {
+	public Reserva(String idReserva,String fechaCheckin, String fechaCheckout,
+			int cantidadAdultos, int cantidadNinos, int valorOrginialReserva) {
 		
 		this.fechaCheckin = fechaCheckin;
 		this.fechaCheckout = fechaCheckout;
-		MapaHabitaciones = mapaHabitaciones;
 		this.cantidadAdultos = cantidadAdultos;
 		this.cantidadNinos = cantidadNinos;
 		this.valorOrginialReserva =valorOrginialReserva;
 		this.idReserva = idReserva;
-		MapaHuespedes = mapaHuespedes;
 		this.Estado=false;
 	}
 	public int generarID() {
