@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Proyecto 1 ultimo/src"/>
+	<classpathentry kind="src" path="Proyecto 2 (modificación proyecto 1)/src"/>
+	<classpathentry kind="src" path="proyecto1/Entrega 3/Proyecto 1/src"/>
+	<classpathentry kind="src" path="Taller0_Olimpicos/src"/>
+	<classpathentry kind="output" path="Proyecto 1 ultimo/bin"/>
+</classpath>
