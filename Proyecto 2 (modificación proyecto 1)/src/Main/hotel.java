@@ -30,7 +30,7 @@ public class hotel {
 	private servicio Servicio = new servicio();
 	private Usuario usuario1 = new Usuario();
 	private restaurante Restaurante;
-	private graficas graficas;
+	//private graficas graficas;
 	public hotel(String ArchivoHabitaciones, String ArchivoMenu, String ArchivoTarifas,
 			String ArchivoServicios, String ArchivoUsuarios) {
 		this.CargarArchivos(ArchivoHabitaciones, ArchivoMenu, ArchivoTarifas, ArchivoServicios, ArchivoUsuarios);

@@ -16,10 +16,12 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import Main.hotel;
+import Main.graficas;
 
 public class Adminp extends JFrame {
 	Plano plano;
 	hotel hotel;
+	graficas graficas;
 
 	private JPanel contentPane;
 
@@ -49,7 +51,7 @@ public class Adminp extends JFrame {
 
 		setTitle("BIENVENIDO ADMINISTRADOR");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 509, 455);
+		setBounds(100, 100, 509, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -163,5 +165,24 @@ public class Adminp extends JFrame {
 		});
 		btnAgregarServicio.setBounds(266, 67, 198, 28);
 		contentPane.add(btnAgregarServicio);
+		
+		
+		
+		
+		
+		JLabel lblNewLabel_3 = new JLabel("GRAFICAS");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setBounds(43, 400, 421, 13);
+		contentPane.add(lblNewLabel_3);
+		
+		JButton btnGraficas = new JButton("Mostrar Graficas");
+		btnGraficas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new graficas();
+			}
+		});
+		btnGraficas.setBounds(150, 420, 200, 21);
+		contentPane.add(btnGraficas);
 	}
 }

@@ -1,0 +1,8 @@
+﻿producto,costo,usuario,tipoHabitacion,costoNoche,restaurante o no;;
+pizza,10000,jorge,suite,200000,restaurante;;
+Spa,20000,roberto,estandar,100000,N/A;;
+hambu,30000,jorge,suite,200000,restaurante;;
+Piscina,20000,roberto,estandar,100000,N/A;;
+pizza,10000,roberto,estandar,100000,restaurante;;
+pizza,10000,guillermo,suite doble,250000,restaurante;;
+Piscina,20000,guillermo,suite doble,250000,N/A;;
