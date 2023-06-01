@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/pablo/OneDrive/Escritorio/.Programación/O.O/Librerias/jfreechart-1.0.19/jfreechart-1.0.19/lib/jcommon-1.0.23.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/pablo/OneDrive/Escritorio/.Programación/O.O/Librerias/jfreechart-1.0.19/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/pablo/OneDrive/Escritorio/.Programación/O.O/Librerias/javatuples-1.0-sources.jar/javatuples-1.0-sources.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Proyecto 1 ultimo/src"/>
+	<classpathentry kind="src" path="Proyecto 2 (modificación proyecto 1)/src"/>
+	<classpathentry kind="src" path="proyecto1/Entrega 3/Proyecto 1/src"/>
+	<classpathentry kind="src" path="Taller0_Olimpicos/src"/>
+	<classpathentry kind="output" path="Proyecto 1 ultimo/bin"/>
 </classpath>
