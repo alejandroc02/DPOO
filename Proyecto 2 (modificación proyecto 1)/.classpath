@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="Proyecto 1 ultimo/src"/>
-	<classpathentry kind="src" path="Proyecto 2 (modificación proyecto 1)/src"/>
-	<classpathentry kind="src" path="proyecto1/Entrega 3/Proyecto 1/src"/>
-	<classpathentry kind="src" path="Taller0_Olimpicos/src"/>
-	<classpathentry kind="output" path="Proyecto 1 ultimo/bin"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/jorgi/OneDrive/Escritorio/DPOO/Proyecto 1/DPOO/Proyecto 2 (modificación proyecto 1)/lib/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/jorgi/OneDrive/Escritorio/DPOO/Proyecto 1/DPOO/Proyecto 2 (modificación proyecto 1)/lib/jfreechart-1.0.19/lib/jcommon-1.0.23.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/jorgi/OneDrive/Escritorio/DPOO/Proyecto 1/DPOO/Proyecto 2 (modificación proyecto 1)/lib/javatuples-1.0-sources/javatuples-1.0-sources.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
