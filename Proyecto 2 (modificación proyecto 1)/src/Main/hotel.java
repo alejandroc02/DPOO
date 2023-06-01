@@ -662,7 +662,6 @@ public class hotel {
 			}else {
 				totalFacturas+=reservaActual.valorOrginialReserva;
 				System.out.println("valor a pagar  de reserva mas factruas" +totalFacturas);
-				System.out.println("Digite PAGAR");
 				System.out.println("Pago con tarjeta ? (true/false) ");
 				boolean res2 = cc.nextBoolean();
 				if(res2) {
