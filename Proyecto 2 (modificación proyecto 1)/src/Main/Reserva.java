@@ -18,6 +18,7 @@ public class Reserva {
 	String nombre2;
 	String nombre3;
 	int valorOrginialReserva;
+	
 
 	HashMap<Integer,Habitacion> MapaHabitaciones;
 	static int contadorId;

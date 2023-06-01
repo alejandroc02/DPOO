@@ -647,27 +647,33 @@ public class hotel {
 			if(totalFacturas==0) {
 				System.out.println("Ya pago todas las facturas solo paga reserva");
 				System.out.println("valor a pagar solo de reserva" +reservaActual.valorOrginialReserva);
-				System.out.println("Digite PAGAR");
-				String res = cc.nextLine();
-				if(res.equals("PAGAR")) {
+				System.out.println("Pago con tarjeta ? (true/false) ");
+				boolean res = cc.nextBoolean();
+				if(res) {
+					PagoTarjetaCredito(reservaActual.valorOrginialReserva,idReserva);
 					reservaActual.Estado=false;
 					System.out.println("pagado");
 				}else {
-					System.out.println("error opcion no valida");
+					System.out.println("Pago en efectivo");
+					reservaActual.Estado=false;
+					System.out.println("Pagado");
 				}
 				
 			}else {
 				totalFacturas+=reservaActual.valorOrginialReserva;
-				System.out.println("valor a pagar solo de reserva" +totalFacturas);
+				System.out.println("valor a pagar  de reserva mas factruas" +totalFacturas);
 				System.out.println("Digite PAGAR");
-				String res2 = cc.nextLine();
-				if(res2.equals("PAGAR")) {
+				System.out.println("Pago con tarjeta ? (true/false) ");
+				boolean res2 = cc.nextBoolean();
+				if(res2) {
+					PagoTarjetaCredito(totalFacturas,idReserva);
 					reservaActual.Estado=false;
 					System.out.println("pagado");
 				}else {
-					System.out.println("error opcion no valida");
+					System.out.println("Pago en efectivo");
+					reservaActual.Estado=false;
+					System.out.println("Pagado");
 				}
-				
 			}
 			
 			
@@ -707,6 +713,7 @@ public class hotel {
 		return 0;
 		
 	}
+	
 	public void finalizarPedidoEncurso(){
 		if(this.pedidoEnCursoRes) {
 			this.pedidoEnCursoRes=false;
@@ -714,6 +721,59 @@ public class hotel {
 		}else {
 			System.out.println("no hay pedido en curso");
 		}
+		
+	}
+	
+	//proyecto 3 
+	
+	public void PagoTarjetaCredito(int Monto,String idReserva) {
+		
+		Scanner cc = new Scanner(System.in);
+		System.out.println("Numero tarjeta");
+		int resNumTarjeta = cc.nextInt();
+		System.out.println("Nombre del encargado de la tarjeta");
+		String resNombre = cc.nextLine();
+		System.out.println("CSV tarjeta");
+		int csvTarjeta = cc.nextInt();
+		ArrayList<String> listaPasarelas=cargarConfiguracionPasarelas();
+		System.out.println("Seleccione una pasarela de pago:");
+		
+        for (int i = 0; i < listaPasarelas.size(); i++) {
+            System.out.println((i + 1) + ". " + listaPasarelas.get(i));
+        }
+        int opcionSeleccionada = cc.nextInt();
+        if (opcionSeleccionada-1<0 || opcionSeleccionada>2) {
+        	System.out.println("Error, eliga una opcion correcta");
+        }else {
+        String nombreClasePasarela = listaPasarelas.get(opcionSeleccionada - 1);
+        try {
+        	Class<?> pasarelaClass = Class.forName(nombreClasePasarela);
+        	gatewayPago pasarelaPago = (gatewayPago) pasarelaClass.getDeclaredConstructor().newInstance();
+        	
+
+            pasarelaPago.realizarPago(resNumTarjeta, resNombre,csvTarjeta,idReserva,Monto);
+            
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        }
+        
+
+	}
+	
+	public ArrayList<String> cargarConfiguracionPasarelas() {
+		ArrayList<String> listaRespuesta= new ArrayList<String>();
+		try(BufferedReader br = new BufferedReader(new FileReader("Datos/Pasarelas.txt"))){
+			String linea;
+			while ((linea=br.readLine())!= null) {
+				listaRespuesta.add(linea);
+				
+			}
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		return listaRespuesta;
 		
 	}
 }
