@@ -30,6 +30,15 @@ public class hotel {
 	private servicio Servicio = new servicio();
 	private Usuario usuario1 = new Usuario();
 	private restaurante Restaurante;
+	private Boolean ParqueaderoPagoH=true;
+	private Boolean ParqueaderoGratisH=false;
+	private Boolean Piscina=true;
+	private Boolean zonasHumedas=true;
+	private Boolean BQQ=true;
+	private Boolean wifi=true;
+	private Boolean recepcion24H=true;
+	private Boolean mascotas=false;
+	
 	//private graficas graficas;
 	public hotel(String ArchivoHabitaciones, String ArchivoMenu, String ArchivoTarifas,
 			String ArchivoServicios, String ArchivoUsuarios) {
@@ -679,6 +688,129 @@ public class hotel {
 		}else {
 			System.out.println("id incorrecto");
 		}
+		
+	}
+	public void checkIn() {
+		Scanner scanner = new Scanner(System.in);
+
+        // Pedir la fecha de check-in
+        System.out.print("Ingrese la fecha de check-in (formato dd/MM/yyyy): ");
+        String fechaCheckin = scanner.nextLine();
+
+        // Pedir la fecha de check-out
+        System.out.print("Ingrese la fecha de check-out (formato dd/MM/yyyy): ");
+        String fechaCheckout = scanner.nextLine();
+
+        // Pedir la cantidad de adultos
+        System.out.print("Ingrese la cantidad de adultos: ");
+        int cantidadAdultos = scanner.nextInt();
+        
+
+        // Pedir la cantidad de niños
+        System.out.print("Ingrese la cantidad de niños: ");
+        int cantidadNinos = scanner.nextInt();
+        
+        System.out.print("cuantas habitaciones desea?");
+        
+        int cantidadHabtiaciones = scanner.nextInt();
+        
+        int totalPersonas=cantidadNinos+cantidadAdultos;
+        int i=0;
+        ArrayList<Habitacion> HabitacionesVaforables=new ArrayList<Habitacion>();
+        while (i<cantidadHabtiaciones) {
+        	System.out.println("De que tipo quiere la habitacion "+i+" ?");
+        	String tipo = scanner.next();
+        
+        	System.out.print("¿	Quiere vista? (true/false): ");
+        	boolean vista = scanner.nextBoolean();
+
+        	System.out.print("¿Quiere balcón? (true/false): ");
+        	boolean balcon = scanner.nextBoolean();
+
+        	System.out.print("¿Quiere cocina? (true/false): ");
+        	boolean cocina = scanner.nextBoolean();
+        	
+        	HashMap<Integer, Habitacion> MapaRespuesta=encontrarHabitacion( vista, balcon, cocina, tipo, fechaCheckin, fechaCheckout);
+        	
+        	for (Habitacion habitaion:MapaRespuesta.values()) {
+        		HabitacionesVaforables.add(habitaion);
+        	}
+        	
+        MapaRespuesta=encontrarHabitaciones(HabitacionesVaforables, cantidadHabtiaciones, totalPersonas);
+
+        
+        
+        
+        int x=0;
+        HashMap<Integer,Huesped> MapaHuesped=new HashMap<>();
+        while(x <= totalPersonas) {
+        	
+        	System.out.print("Ingrese la identificación: ");
+            int identificacion = scanner.nextInt();
+            scanner.nextLine(); // Consumir el salto de línea después de leer un entero
+            
+            System.out.print("Ingrese el nombre: ");
+            String nombre = scanner.nextLine();
+
+            System.out.print("Ingrese el correo: ");
+            String correo = scanner.nextLine();
+
+            System.out.print("Ingrese el teléfono: ");
+            String telefono = scanner.nextLine();
+
+            Huesped huespedActual=agregarHuespedAReserva(nombre, identificacion, correo, telefono);
+            MapaHuesped.put(huespedActual.getIdentificacion(), huespedActual);
+        	
+        	
+        	x+=1;
+        }
+        boolean Continuar =	false;
+        System.out.println("Las habitaciones son :");
+        
+        for (Habitacion habitacionActual : MapaRespuesta.values()) {
+
+        	System.out.println("Habitacion numero: "+habitacionActual.getId());
+        	System.out.println("El hotel cuenta con: Piscina, zonas humendas, BQQ, wifi, y recepcion 24H, pero se aceptan mascotas ni tampoco hay parqueadero gratis");
+        	int total=0;
+        	LocalDate fechaIN = LocalDate.parse(fechaCheckin);
+        	LocalDate fehcaOut = LocalDate.parse(fechaCheckout);
+        	total=calcularReserva(habitacionActual.getTipo(),fechaIN,fehcaOut);
+        	System.out.println("Precio por total de dias: "+total);
+        }
+        
+        while(!Continuar) {
+        	System.out.println("¿Desea continuar con la reserva? (s/n)");
+	        String respuesta = scanner.nextLine();
+	        if (respuesta.equalsIgnoreCase("s")) {
+	            System.out.println("Continuando con la reserva...");
+	            System.out.println("El hotel cuenta con: Piscina, zonas humendas, BQQ, wifi, y recepcion 24H, pero se aceptan mascotas ni tampoco hay parqueadero gratis");
+	            System.out.println("El precio total de la reserva sin servicios es de: ");
+	        	//debe de poder reconcoer los dias de la semana
+	        	//y calcuclar dia por dia
+	            crearReserva(fechaCheckin, fechaCheckout, tipo, MapaRespuesta, cantidadAdultos, cantidadNinos, MapaHuesped);
+	        } else {
+	            System.out.println("Cancelando la reserva...");
+	        }
+        }
+        
+        System.out.println("¿Desea continuar con la reserva? (s/n)");
+        String respuesta = scanner.nextLine();
+        
+        if (respuesta.equalsIgnoreCase("s")) {
+            System.out.println("Continuando con la reserva...");
+        } else {
+            System.out.println("Cancelando la reserva...");
+        }
+        crearReserva(fechaCheckin, fechaCheckout, tipo, MapaRespuesta, cantidadAdultos, cantidadNinos, MapaHuesped);
+        
+        }  
+		
+	}
+	
+	public void crearReserva(String idReserva,String fechaCheckin, String fechaCheckout, HashMap<Integer, Habitacion> mapaHabitaciones,
+			int cantidadAdultos, int cantidadNinos,  HashMap<Integer, Huesped> mapaHuespedes){
+		Reserva reservaActual = new Reserva(fechaCheckout, fechaCheckout, fechaCheckout, cantidadNinos, cantidadNinos, cantidadNinos);
+		mapaReserva.put(idReserva, reservaActual);
 		
 	}
 	
