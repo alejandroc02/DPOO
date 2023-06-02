@@ -31,6 +31,15 @@ public class hotel {
 	private servicio Servicio = new servicio();
 	private Usuario usuario1 = new Usuario();
 	private restaurante Restaurante;
+	private Boolean ParqueaderoPagoH=true;
+	private Boolean ParqueaderoGratisH=false;
+	private Boolean Piscina=true;
+	private Boolean zonasHumedas=true;
+	private Boolean BQQ=true;
+	private Boolean wifi=true;
+	private Boolean recepcion24H=true;
+	private Boolean mascotas=false;
+	
 	//private graficas graficas;
 	public hotel(String ArchivoHabitaciones, String ArchivoMenu, String ArchivoTarifas,
 			String ArchivoServicios, String ArchivoUsuarios) {

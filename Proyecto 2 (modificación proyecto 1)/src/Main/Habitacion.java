@@ -14,6 +14,21 @@ public class Habitacion {
 	private boolean ocupada;
     private ArrayList<Cama> camas;
     HashMap<LocalDate, Boolean> mapaFechasOcupadas = new HashMap<>();
+    private int Tamano=30;
+    private int Cama=20;
+    private Boolean Aire=true;
+    private Boolean Calefaccion=true;
+    private Boolean Tv=true;
+    private Boolean Cafetera=false;
+    private Boolean RopaYTapetes=true;
+    private Boolean Plancha=true;
+    private Boolean Secador=false;
+    private Boolean VoltajeAc=true;
+    private Boolean TomaUSBA=true;
+    private Boolean TomaUSBC=true;
+    private Boolean Desayuno=true;
+    
+    
 
 
     
@@ -25,6 +40,7 @@ public class Habitacion {
         this.vista = vista;
         this.balcon = balcon;
         this.cocina = cocina;
+        
         
     }
     public HashMap<LocalDate, Boolean> GetMapaFechas(){
