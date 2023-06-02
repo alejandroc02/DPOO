@@ -8,7 +8,7 @@ class PayPal extends gatewayPago{
 			
 
 	@Override
-	void realizarPago(int resNumTarjeta, String resNombre,int csvTarjeta,String idReserva,int monto) {
+	void realizarPago(String resNumTarjeta, String resNombre,int csvTarjeta,String idReserva,int monto) {
 		try (FileWriter fileWriter = new FileWriter("Datos/PayPal.txt",true)) {
 			String Texto=idReserva+","+monto+","+true;
 			fileWriter.write(Texto);

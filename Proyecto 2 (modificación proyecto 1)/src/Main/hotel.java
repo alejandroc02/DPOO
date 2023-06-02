@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -193,7 +194,7 @@ public class hotel {
 		return usuario1.consultarFechas(fechaInicio, fechaFinal, ListaHabitaciones);
 	}
 
-	public boolean reserva(String fechaInicio, String fechaFin, int id){
+	public boolean reservacuarto(String fechaInicio, String fechaFin, int id){
 		boolean confirmar= false;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate fechainicial = LocalDate.parse(fechaInicio, formatter);
@@ -205,6 +206,28 @@ public class hotel {
 			}
 		}
 		return confirmar;
+	}
+	public void reserva(String id, String nombre, String fechaCheckin, String fechaCheckout,
+	int cantidadAdultos, int cantidadNinos, String tipo){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate fechainicial = LocalDate.parse(fechaCheckin, formatter);
+		LocalDate fechafinal = LocalDate.parse(fechaCheckout, formatter); 
+		int valor = calcularReserva(tipo, fechainicial, fechafinal);
+		Reserva nueva = new Reserva(id, nombre, fechaCheckin, fechaCheckout, cantidadAdultos, cantidadNinos, valor);
+		mapaReserva.put(nueva.getIdReserva(), nueva);
+	}
+	public int calcularReserva(String tipo, LocalDate fechaCheckin, LocalDate fechaCheckout) {
+
+		Calendario calendario = listaTarifa.get(tipo);
+
+		List<Tarifa> ListaTarifas = calendario.consultarEventosEntreF(fechaCheckin, fechaCheckout);
+		int respuesta = 0;
+		for (Tarifa tarifaActual : ListaTarifas) {
+			int precioTarifa = tarifaActual.getPrecio();
+			respuesta += precioTarifa;
+		}
+
+		return respuesta;
 	}
 
 	public HashMap<String, String> consultarPersonal() {
@@ -344,35 +367,35 @@ public class hotel {
 		}
 	}
 
-	public void agregarHuesped(String nombre, int identificacion, String correo, String telefono) {
+	public boolean agregarHuesped(String nombre, int identificacion, String correo, String telefono) {
 		Boolean ispresente = mapaHuesped.containsKey(identificacion);
 
 		if (ispresente) {
-			System.out.println("El huesped ya esta registrado");
+			return false;
 
 		} else {
 			Huesped huespedActual = new Huesped(nombre, identificacion, correo, telefono);
 
 			mapaHuesped.put(identificacion, huespedActual);
+			return true;
 
 		}
 	}
 
-	public Huesped agregarHuespedAReserva(String nombre, int identificacion, String correo, String telefono) {
+	public boolean agregarHuespedAReserva(String nombre, int identificacion, String correo, String telefono) {
 		Boolean ispresente = mapaHuesped.containsKey(identificacion);
 
 		Huesped huespedActual = new Huesped(nombre, identificacion, correo, telefono);
 
 		if (ispresente) {
-			System.out.println(
-					"El huesped ya estaba registrado, se agregara la nueva info a la reserva pero mantendra la informacion original en el sistema");
+			return false;
 
 		} else {
 
 			mapaHuesped.put(identificacion, huespedActual);
+			return true;
 
 		}
-		return huespedActual;
 	}
 
 	public void editarHuesped(String nombre, int identificacion, String correo, String telefono) {
@@ -543,20 +566,6 @@ public class hotel {
 		}
 		return MapaRespuesta;
 	}
-
-	public int calcularReserva(String tipo, LocalDate fechaCheckin, LocalDate fechaCheckout) {
-
-		Calendario calendario = listaTarifa.get(tipo);
-
-		List<Tarifa> ListaTarifas = calendario.consultarEventosEntreF(fechaCheckin, fechaCheckout);
-		int respuesta = 0;
-		for (Tarifa tarifaActual : ListaTarifas) {
-			int precioTarifa = tarifaActual.getPrecio();
-			respuesta += precioTarifa;
-		}
-
-		return respuesta;
-	}
 	// podemos agregar funcion para que cargue un archivo
 	// la funcion consultarServicios podria retornar el mapa si es necesario, es
 	// facil el arrreglo
@@ -629,7 +638,7 @@ public class hotel {
 	public boolean EliminarServicio(String nombre) {
 		return Servicio.eliminarServicio(nombre);
 	}
-	
+	/* 
 	public void checkOut(String idReserva) {
 		boolean isPresente=mapaReserva.containsKey(idReserva);
 		int totalFacturas=0;
@@ -681,6 +690,8 @@ public class hotel {
 		}
 		
 	}
+	mientras arreglo pago tarjeta**
+	*/
 	
 	public void crearPedidoRestaruante(Boolean respuestapedido) {
 
@@ -725,28 +736,14 @@ public class hotel {
 	
 	//proyecto 3 
 	
-	public void PagoTarjetaCredito(int Monto,String idReserva) {
+	public void PagoTarjetaCredito(String opcionseleccionada,int Monto,String idReserva, String resNumTarjeta, String resNombre, int csvTarjeta) {
 		
-		Scanner cc = new Scanner(System.in);
-		System.out.println("Numero tarjeta");
-		int resNumTarjeta = cc.nextInt();
-		System.out.println("Nombre del encargado de la tarjeta");
-		String resNombre = cc.nextLine();
-		System.out.println("CSV tarjeta");
-		int csvTarjeta = cc.nextInt();
-		ArrayList<String> listaPasarelas=cargarConfiguracionPasarelas();
-		System.out.println("Seleccione una pasarela de pago:");
 		
-        for (int i = 0; i < listaPasarelas.size(); i++) {
-            System.out.println((i + 1) + ". " + listaPasarelas.get(i));
-        }
-        int opcionSeleccionada = cc.nextInt();
-        if (opcionSeleccionada-1<0 || opcionSeleccionada>2) {
-        	System.out.println("Error, eliga una opcion correcta");
-        }else {
-        String nombreClasePasarela = listaPasarelas.get(opcionSeleccionada - 1);
+		
+
+        String nombreClasePasarela = opcionseleccionada;
         try {
-        	Class<?> pasarelaClass = Class.forName(nombreClasePasarela);
+        	Class<?> pasarelaClass = Class.forName("PayPal");
         	gatewayPago pasarelaPago = (gatewayPago) pasarelaClass.getDeclaredConstructor().newInstance();
         	
 
@@ -754,7 +751,6 @@ public class hotel {
             
         }catch (Exception e) {
             e.printStackTrace();
-        }
         }
         
 

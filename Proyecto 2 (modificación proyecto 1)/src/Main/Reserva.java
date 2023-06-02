@@ -15,8 +15,6 @@ public class Reserva {
 	String idhabitacion;
 	//Información acompañantes
 	String nombre1;
-	String nombre2;
-	String nombre3;
 	int valorOrginialReserva;
 	
 
@@ -27,11 +25,12 @@ public class Reserva {
 	ArrayList<Factura> listaFacturas=new ArrayList<Factura>();
 	Random rand = new Random();
 	
-	public Reserva(String idReserva,String fechaCheckin, String fechaCheckout,
+	public Reserva(String idReserva,String nombre, String fechaCheckin, String fechaCheckout,
 			int cantidadAdultos, int cantidadNinos, int valorOrginialReserva) {
 		
 		this.fechaCheckin = fechaCheckin;
 		this.fechaCheckout = fechaCheckout;
+		this.nombre1=nombre;
 		this.cantidadAdultos = cantidadAdultos;
 		this.cantidadNinos = cantidadNinos;
 		this.valorOrginialReserva =valorOrginialReserva;
