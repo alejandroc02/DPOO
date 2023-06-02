@@ -647,11 +647,10 @@ public class hotel {
 	public boolean EliminarServicio(String nombre) {
 		return Servicio.eliminarServicio(nombre);
 	}
-	/* 
-	public void checkOut(String idReserva) {
+	
+	public void checkOut(Boolean res,Boolean res2, String opcionseleccionada,int Monto,String idReserva, String resNumTarjeta, String resNombre, int csvTarjeta) {
 		boolean isPresente=mapaReserva.containsKey(idReserva);
 		int totalFacturas=0;
-		Scanner cc = new Scanner(System.in);
 		if (isPresente) {
 			Reserva reservaActual=mapaReserva.get(idReserva);
 			ArrayList<Factura> listaFcaturaActual=reservaActual.getListaFacturas();
@@ -663,12 +662,8 @@ public class hotel {
 				}	
 			}
 			if(totalFacturas==0) {
-				System.out.println("Ya pago todas las facturas solo paga reserva");
-				System.out.println("valor a pagar solo de reserva" +reservaActual.valorOrginialReserva);
-				System.out.println("Pago con tarjeta ? (true/false) ");
-				boolean res = cc.nextBoolean();
 				if(res) {
-					PagoTarjetaCredito(reservaActual.valorOrginialReserva,idReserva);
+					PagoTarjetaCredito(opcionseleccionada, reservaActual.valorOrginialReserva,idReserva, resNumTarjeta, resNombre, csvTarjeta);
 					reservaActual.Estado=false;
 					System.out.println("pagado");
 				}else {
@@ -681,9 +676,8 @@ public class hotel {
 				totalFacturas+=reservaActual.valorOrginialReserva;
 				System.out.println("valor a pagar  de reserva mas factruas" +totalFacturas);
 				System.out.println("Pago con tarjeta ? (true/false) ");
-				boolean res2 = cc.nextBoolean();
 				if(res2) {
-					PagoTarjetaCredito(totalFacturas,idReserva);
+					PagoTarjetaCredito(opcionseleccionada, totalFacturas,idReserva, resNumTarjeta, resNombre, csvTarjeta);
 					reservaActual.Estado=false;
 					System.out.println("pagado");
 				}else {
@@ -699,8 +693,6 @@ public class hotel {
 		}
 		
 	}
-	mientras arreglo pago tarjeta**
-	*/
 	
 	public void crearPedidoRestaruante(Boolean respuestapedido) {
 
@@ -745,21 +737,25 @@ public class hotel {
 	
 	//proyecto 3 
 	
-	public void PagoTarjetaCredito(String opcionseleccionada,int Monto,String idReserva, String resNumTarjeta, String resNombre, int csvTarjeta) {
+	public Boolean PagoTarjetaCredito(String opcionseleccionada,int Monto,String idReserva, String resNumTarjeta, String resNombre, int csvTarjeta) {
 		
 		
 		
 
-        String nombreClasePasarela = opcionseleccionada;
+        String nombreClasePasarela = "Main."+ opcionseleccionada;
         try {
-        	Class<?> pasarelaClass = Class.forName("PayPal");
+        	Class<?> pasarelaClass = Class.forName(nombreClasePasarela);
         	gatewayPago pasarelaPago = (gatewayPago) pasarelaClass.getDeclaredConstructor().newInstance();
         	
 
             pasarelaPago.realizarPago(resNumTarjeta, resNombre,csvTarjeta,idReserva,Monto);
+			Reserva reservaActual=mapaReserva.get(idReserva);
+			reservaActual.Estado=false;
+			return pasarelaPago.obtenerResultadoPago();
             
         }catch (Exception e) {
             e.printStackTrace();
+			return false;
         }
         
 

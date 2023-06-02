@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 class PayPal extends gatewayPago{
-	private String resultadoPago=null;
+	private Boolean resultadoPago=null;
 			
 
 	@Override
@@ -13,16 +13,17 @@ class PayPal extends gatewayPago{
 			String Texto=idReserva+","+monto+","+true;
 			fileWriter.write(Texto);
 			fileWriter.close();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		resultadoPago = "Pago exitoso";
+		resultadoPago = true;
 	}
 
 	@Override
-	String obtenerResultadoPago() {
+	Boolean obtenerResultadoPago() {
 		// TODO Auto-generated method stub
 		return resultadoPago;
 	}

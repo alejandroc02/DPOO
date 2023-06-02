@@ -90,13 +90,14 @@ public class Reservar extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "HECHO!");
 
-						int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar de una vez?", "Selección",
+						int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar de una vez? (10% decuento)", "Selección",
 								JOptionPane.YES_NO_OPTION);
 						if (respuesta == JOptionPane.YES_OPTION) {
+							monto= (int) (monto - monto*(0.10));
 							PagoTarjeta n= new PagoTarjeta(monto, idhab, hotel);
 							n.setVisible(true);
 						} else if (respuesta == JOptionPane.NO_OPTION) {
-							System.out.println("Seleccionaste No");
+							dispose();
 						}
 						if (cantidadAdultos > 1) {
 							JOptionPane.showMessageDialog(null, "Debe agregar a los huéspedes adultos!");

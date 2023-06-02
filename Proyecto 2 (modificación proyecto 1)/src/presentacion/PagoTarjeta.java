@@ -42,7 +42,12 @@ public class PagoTarjeta extends JFrame{
                 int csv = Integer.parseInt(csvField.getText());
                 String numero = numeroTarjetaField.getText();
                 String pasarelaSeleccionada = (String) pasarelasComboBox.getSelectedItem();
-                hotel.PagoTarjetaCredito(pasarelaSeleccionada, monto, idreserva, numero, nombre, csv);
+                Boolean confirmar=hotel.PagoTarjetaCredito(pasarelaSeleccionada, monto, idreserva, numero, nombre, csv);
+                if(confirmar){
+                    JOptionPane.showMessageDialog(null, "HECHO!");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Hubo un error en su pago");
+                }
                 
             }
         });
