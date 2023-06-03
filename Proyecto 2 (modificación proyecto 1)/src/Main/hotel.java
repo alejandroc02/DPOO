@@ -18,7 +18,7 @@ public class hotel {
 	private static final String String = null;
 	boolean pedidoEnCursoRes = false;
 	private HashMap<String, ArrayList<Habitacion>> Habitaciones = new HashMap<String, ArrayList<Habitacion>>();//
-	private ArrayList<Habitacion> ListaHabitaciones = new ArrayList<Habitacion>();
+	public ArrayList<Habitacion> ListaHabitaciones = new ArrayList<Habitacion>();
 	private HashMap<String, String> listaPersonal = new HashMap<String, String>();// hashMap donde el valor es el
 																					// usuario del empleado y el valor
 																					// la contrasena
@@ -26,7 +26,7 @@ public class hotel {
 	private HashMap<String, Calendario> listaTarifa = new HashMap<>();// Hashmap en donde la llave es el tipo y el valor
 																		// otro hashmap en donde la llave es la fecha de
 																		// la tarifa y el valor es una Tarif
-	private HashMap<Integer, Huesped> mapaHuesped = new HashMap<>();
+	public HashMap<Integer, Huesped> mapaHuesped = new HashMap<>();
 	private HashMap<String, Reserva> mapaReserva = new HashMap<>();
 	private servicio Servicio = new servicio();
 	private Usuario usuario1 = new Usuario();
@@ -49,7 +49,7 @@ public class hotel {
 
 	}
 
-	private void CargarArchivos(String ArchivoHabitaciones, String ArchivoMenu, 
+	Boolean CargarArchivos(String ArchivoHabitaciones, String ArchivoMenu, 
 			String ArchivoTarifas, String ArchivoServicios, String ArchivoUsuarios) {
 		String line = "";
 		String line3 = "";
@@ -188,6 +188,7 @@ public class hotel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return true;
 
 	}
 	
@@ -403,8 +404,23 @@ public class hotel {
 
 			mapaHuesped.put(identificacion, huespedActual);
 			return true;
-
 		}
+		}
+		public Huesped  agregarHuespedAReserva2(String nombre, int identificacion, String correo, String telefono) {
+			Boolean ispresente = mapaHuesped.containsKey(identificacion);
+
+			Huesped huespedActual = new Huesped(nombre, identificacion, correo, telefono);
+
+			if (ispresente) {
+				
+
+			} else {
+
+				mapaHuesped.put(identificacion, huespedActual);
+				
+
+			}
+			return huespedActual;
 	}
 
 	public void editarHuesped(String nombre, int identificacion, String correo, String telefono) {
@@ -733,6 +749,121 @@ public class hotel {
 			System.out.println("no hay pedido en curso");
 		}
 		
+	}
+	
+	public void checkIn() {
+		Scanner scanner = new Scanner(System.in);
+
+        // Pedir la fecha de check-in
+        System.out.print("Ingrese la fecha de check-in (formato dd/MM/yyyy): ");
+        String fechaCheckin = scanner.nextLine();
+
+        // Pedir la fecha de check-out
+        System.out.print("Ingrese la fecha de check-out (formato dd/MM/yyyy): ");
+        String fechaCheckout = scanner.nextLine();
+
+        // Pedir la cantidad de adultos
+        System.out.print("Ingrese la cantidad de adultos: ");
+        int cantidadAdultos = scanner.nextInt();
+
+
+        // Pedir la cantidad de niños
+        System.out.print("Ingrese la cantidad de niños: ");
+        int cantidadNinos = scanner.nextInt();
+
+        System.out.print("cuantas habitaciones desea?");
+
+        int cantidadHabtiaciones = scanner.nextInt();
+
+        int totalPersonas=cantidadNinos+cantidadAdultos;
+        int i=0;
+        ArrayList<Habitacion> HabitacionesVaforables=new ArrayList<Habitacion>();
+        while (i<cantidadHabtiaciones) {
+        	System.out.println("De que tipo quiere la habitacion "+i+" ?");
+        	String tipo = scanner.next();
+
+        	System.out.print("¿	Quiere vista? (true/false): ");
+        	boolean vista = scanner.nextBoolean();
+
+        	System.out.print("¿Quiere balcón? (true/false): ");
+        	boolean balcon = scanner.nextBoolean();
+
+        	System.out.print("¿Quiere cocina? (true/false): ");
+        	boolean cocina = scanner.nextBoolean();
+
+        	HashMap<Integer, Habitacion> MapaRespuesta=encontrarHabitacion( vista, balcon, cocina, tipo, fechaCheckin, fechaCheckout);
+
+        	for (Habitacion habitaion:MapaRespuesta.values()) {
+        		HabitacionesVaforables.add(habitaion);
+        	}
+
+        MapaRespuesta=encontrarHabitaciones(HabitacionesVaforables, cantidadHabtiaciones, totalPersonas);
+
+
+
+
+        int x=0;
+        HashMap<Integer,Huesped> MapaHuesped=new HashMap<>();
+        while(x <= totalPersonas) {
+
+        	System.out.print("Ingrese la identificación: ");
+            int identificacion = scanner.nextInt();
+            scanner.nextLine(); // Consumir el salto de línea después de leer un entero
+
+            System.out.print("Ingrese el nombre: ");
+            String nombre = scanner.nextLine();
+
+            System.out.print("Ingrese el correo: ");
+            String correo = scanner.nextLine();
+
+            System.out.print("Ingrese el teléfono: ");
+            String telefono = scanner.nextLine();
+
+            Huesped huespedActual=agregarHuespedAReserva2(nombre, identificacion, correo, telefono);
+            MapaHuesped.put(huespedActual.getIdentificacion(), huespedActual);
+
+
+        	x+=1;
+        }
+        boolean Continuar =	false;
+        System.out.println("Las habitaciones son :");
+
+        for (Habitacion habitacionActual : MapaRespuesta.values()) {
+
+        	System.out.println("Habitacion numero: "+habitacionActual.getId());
+        	System.out.println("El hotel cuenta con: Piscina, zonas humendas, BQQ, wifi, y recepcion 24H, pero se aceptan mascotas ni tampoco hay parqueadero gratis");
+        	int total=0;
+        	LocalDate fechaIN = LocalDate.parse(fechaCheckin);
+        	LocalDate fehcaOut = LocalDate.parse(fechaCheckout);
+        	total=calcularReserva(habitacionActual.getTipo(),fechaIN,fehcaOut);
+        	System.out.println("Precio por total de dias: "+total);
+        }
+
+        while(!Continuar) {
+        	System.out.println("¿Desea continuar con la reserva? (s/n)");
+	        String respuesta = scanner.nextLine();
+	        if (respuesta.equalsIgnoreCase("s")) {
+	            System.out.println("Continuando con la reserva...");
+	            System.out.println("Nombre a quien se hace reserva");
+	            String nombre = scanner.nextLine();
+	            System.out.println("El hotel cuenta con: Piscina, zonas humendas, BQQ, wifi, y recepcion 24H, pero se aceptan mascotas ni tampoco hay parqueadero gratis");
+	            System.out.println("El precio total de la reserva sin servicios es de: ");
+	        	//debe de poder reconcoer los dias de la semana
+	        	//y calcuclar dia por dia
+	            crearReserva(nombre,fechaCheckin, fechaCheckout, MapaRespuesta, cantidadAdultos, cantidadNinos, MapaHuesped);
+	        } else {
+	            System.out.println("Cancelando la reserva...");
+	        }
+        }
+        }
+
+	}
+	
+	public Boolean crearReserva(String idReserva,String fechaCheckin, String fechaCheckout, HashMap<Integer, Habitacion> mapaHabitaciones,
+			int cantidadAdultos, int cantidadNinos,  HashMap<Integer, Huesped> mapaHuespedes){
+		Reserva reservaActual = new Reserva(fechaCheckout, fechaCheckout, fechaCheckout, fechaCheckout, cantidadNinos, cantidadNinos, cantidadNinos);
+		mapaReserva.put(idReserva, reservaActual);
+		return true;
 	}
 	
 	//proyecto 3 
