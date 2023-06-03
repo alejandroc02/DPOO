@@ -44,7 +44,7 @@ public class Usuario {
 			Set<LocalDate> conjuntoclaves=fechasOcupadas.keySet();
 			ArrayList<LocalDate> listaClaves = new ArrayList<>(conjuntoclaves);
 			if (listaClaves.size()==0){
-				String añadir="Ubicación: " + habitacionactual.getUbicacion() + "\n" + ", Tipo: "
+				String añadir="ID "+habitacionactual.getId()+"\n"+", Ubicación: " + habitacionactual.getUbicacion() + "\n" + ", Tipo: "
 				+ habitacionactual.getTipo() + "\n" +
 				", Capacidad: " + java.lang.String.valueOf(habitacionactual.getCapacidad()) + "\n" + ", Vista: "
 				+ java.lang.String.valueOf(habitacionactual.isVista()) + "\n" + ", Balcon: "
@@ -74,7 +74,7 @@ public class Usuario {
 				LocalDate fechaFinal2=listaClaves.get(0);
 				LocalDate fechaInicial2=listaClaves.get(listaClaves.size()-1);
 				if (!(fechaInicial2.isAfter(fechaInicio) && fechaFinal2.isBefore(fechafin))) {
-                	String añadir="Ubicación: " + habitacionactual.getUbicacion() + "\n" + ", Tipo: "
+                	String añadir="ID "+habitacionactual.getId()+"\n"+", Ubicación: " + habitacionactual.getUbicacion() + "\n" + ", Tipo: "
 							+ habitacionactual.getTipo() + "\n" +
 							", Capacidad: " + java.lang.String.valueOf(habitacionactual.getCapacidad()) + "\n" + ", Vista: "
 							+ java.lang.String.valueOf(habitacionactual.isVista()) + "\n" + ", Balcon: "

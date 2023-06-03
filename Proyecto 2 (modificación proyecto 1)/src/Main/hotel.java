@@ -308,7 +308,7 @@ public class hotel {
 			for (Habitacion habitacionActual : listaHabitacionesActuales) {
 				int idHabitacionActual = habitacionActual.getId();
 				if (idHabitacionActual == id) {
-					String cadena = "Ubicación: " + habitacionActual.getUbicacion() + "\n" + "Tipo: "
+					String cadena = "ID: "+habitacionActual.getId()+"\n"+"Ubicación: " + habitacionActual.getUbicacion() + "\n" + "Tipo: "
 							+ habitacionActual.getTipo() + "\n" +
 							"Capacidad: " + java.lang.String.valueOf(habitacionActual.getCapacidad()) + "\n" + "Vista: "
 							+ java.lang.String.valueOf(habitacionActual.isVista()) + "\n" + "Balcon: "
