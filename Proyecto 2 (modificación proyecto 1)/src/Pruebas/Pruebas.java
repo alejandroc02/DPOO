@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 import Main.Habitacion;
 import Main.hotel;
 
+
+//aveces se presenta un error en donde no ecnutra la clase que ya exitse, no supimos como suliconar
 public class Pruebas {
 	private hotel Hotel;
 	
