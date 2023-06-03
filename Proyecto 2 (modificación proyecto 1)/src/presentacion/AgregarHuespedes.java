@@ -31,8 +31,9 @@ public class AgregarHuespedes extends JFrame {
 	 * Create the frame.
 	 */
 	public AgregarHuespedes(hotel hotel) {
+		setTitle("RegistrarHuespedes");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 300, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -72,7 +73,7 @@ public class AgregarHuespedes extends JFrame {
 		textTelefono.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Telefono");
-		lblNewLabel_3.setBounds(10, 153, 45, 13);
+		lblNewLabel_3.setBounds(10, 150, 80, 13);
 		contentPane.add(lblNewLabel_3);
 		
 		JButton btnNewButton = new JButton("Confirmar");
@@ -85,13 +86,17 @@ public class AgregarHuespedes extends JFrame {
 				Boolean respuesta=hotel.agregarHuespedAReserva(nombre, id, correo, telefono);
 				if (respuesta){
 					JOptionPane.showMessageDialog(null, "HECHO!");
+					textNombre.setText("");
+					textID.setText("");
+					textCorreo.setText("");
+					textTelefono.setText("");
 				}else{
 					JOptionPane.showMessageDialog(null, "Ya está agregado!");
 				}
 				
 			}
 		});
-		btnNewButton.setBounds(10, 193, 85, 21);
+		btnNewButton.setBounds(10, 193, 95, 21);
 		contentPane.add(btnNewButton);
 	}
 }

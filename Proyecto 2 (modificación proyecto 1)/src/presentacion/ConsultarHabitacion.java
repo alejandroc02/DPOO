@@ -29,6 +29,7 @@ public class ConsultarHabitacion extends JFrame {
 	 * Create the frame.
 	 */
 	public ConsultarHabitacion(hotel hotel) {
+		setTitle("Consultar Habitación");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -63,7 +64,7 @@ public class ConsultarHabitacion extends JFrame {
 				}
 			}
 		});
-		btnConfirmar.setBounds(20, 124, 85, 21);
+		btnConfirmar.setBounds(20, 124, 95, 21);
 		contentPane.add(btnConfirmar);
 		
 		textTipo = new JTextField();
