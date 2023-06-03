@@ -1,4 +1,4 @@
-package Main;
+package Pruebas;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -13,6 +13,9 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import Main.Habitacion;
+import Main.hotel;
 
 public class Pruebas {
 	private hotel Hotel;

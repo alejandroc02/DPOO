@@ -41,7 +41,7 @@ public class hotel {
 
 	}
 
-	Boolean CargarArchivos(String ArchivoHabitaciones, String ArchivoMenu, 
+	public Boolean CargarArchivos(String ArchivoHabitaciones, String ArchivoMenu, 
 			String ArchivoTarifas, String ArchivoServicios, String ArchivoUsuarios) {
 		String line = "";
 		String line3 = "";
