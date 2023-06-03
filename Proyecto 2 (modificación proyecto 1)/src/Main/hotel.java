@@ -32,16 +32,14 @@ public class hotel {
 	private Usuario usuario1 = new Usuario();
 	private restaurante Restaurante;
 	
-	//private graficas graficas;
 	public hotel(String ArchivoHabitaciones, String ArchivoMenu, String ArchivoTarifas,
 			String ArchivoServicios, String ArchivoUsuarios) {
 		this.CargarArchivos(ArchivoHabitaciones, ArchivoMenu, ArchivoTarifas, ArchivoServicios, ArchivoUsuarios);
 		this.Restaurante=new restaurante(ArchivoMenu);
-		//this.graficas = new graficas();
 
 	}
 
-	Boolean CargarArchivos(String ArchivoHabitaciones, String ArchivoMenu, 
+	public Boolean CargarArchivos(String ArchivoHabitaciones, String ArchivoMenu, 
 			String ArchivoTarifas, String ArchivoServicios, String ArchivoUsuarios) {
 		String line = "";
 		String line3 = "";

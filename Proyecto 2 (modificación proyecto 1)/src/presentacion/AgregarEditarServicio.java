@@ -24,6 +24,7 @@ public class AgregarEditarServicio extends JFrame {
 	 * Create the frame.
 	 */
 	public AgregarEditarServicio(hotel hotel) {
+		setTitle("AgregarServicio");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 214, 249);
 		contentPane = new JPanel();
@@ -60,7 +61,7 @@ public class AgregarEditarServicio extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(10, 124, 85, 21);
+		btnNewButton.setBounds(10, 124, 95, 21);
 		contentPane.add(btnNewButton);
 	}
 

@@ -31,6 +31,7 @@ import java.awt.event.ActionEvent;
 		 * Create the frame.
 		 */
 		public Inventario(hotel hotel) {
+			setTitle("Consultar Inventario");
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			setBounds(100, 100, 450, 300);
 			contentPane = new JPanel();
@@ -59,15 +60,21 @@ import java.awt.event.ActionEvent;
 						if (habitacion ==null) {
 							JOptionPane.showMessageDialog(null, "No se encontró la habitación");
 						}else {
-							String cadena="Ocupada" +String.valueOf(habitacion.isOcupada());
+							String cadena;
+							if(habitacion.isOcupada()) {
+							     cadena="La habitación esta ocupada";
+							}else {
+							    cadena="La habitación esta libre";
+							}
 							JOptionPane.showMessageDialog(null, cadena);
+							
 						}
 						
 					}
 				}
 				
 			});
-	btnConfirmar.setBounds(20, 124, 85, 21);
+	btnConfirmar.setBounds(20, 124, 95, 21);
 	contentPane.add(btnConfirmar);
 	
 	textTipo = new JTextField();
