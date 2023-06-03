@@ -31,14 +31,6 @@ public class hotel {
 	private servicio Servicio = new servicio();
 	private Usuario usuario1 = new Usuario();
 	private restaurante Restaurante;
-	private Boolean ParqueaderoPagoH=true;
-	private Boolean ParqueaderoGratisH=false;
-	private Boolean Piscina=true;
-	private Boolean zonasHumedas=true;
-	private Boolean BQQ=true;
-	private Boolean wifi=true;
-	private Boolean recepcion24H=true;
-	private Boolean mascotas=false;
 	
 	//private graficas graficas;
 	public hotel(String ArchivoHabitaciones, String ArchivoMenu, String ArchivoTarifas,
@@ -71,19 +63,27 @@ public class hotel {
 				String[] fields = line.split(cvsSplitBy);
 				Habitacion HabitacionActual = new Habitacion(Integer.parseInt(fields[0]), fields[1], fields[2],
 						Integer.parseInt(fields[3]), Boolean.parseBoolean(fields[4]), Boolean.parseBoolean(fields[5]),
-						Boolean.parseBoolean(fields[6]));
+						Boolean.parseBoolean(fields[6]), Boolean.parseBoolean(fields[8]), Boolean.parseBoolean(fields[9]), Boolean.parseBoolean(fields[10]),
+						Boolean.parseBoolean(fields[11]), Boolean.parseBoolean(fields[12]), Boolean.parseBoolean(fields[13]), Boolean.parseBoolean(fields[14]), Boolean.parseBoolean(fields[15]), Boolean.parseBoolean(fields[16])
+						, Boolean.parseBoolean(fields[17]), Boolean.parseBoolean(fields[18]));
 
 				Boolean ispresenteTipo = Habitaciones.containsKey(fields[1]);
 				if (ispresenteTipo) {
 					ArrayList<Habitacion> listaHabitacionesActuales = Habitaciones.get(fields[1]);
 					listaHabitacionesActuales.add(HabitacionActual);
 					Habitaciones.put(fields[1], listaHabitacionesActuales);
-					ListaHabitaciones.addAll(listaHabitacionesActuales);
+					for(Habitacion habitacion:listaHabitacionesActuales){
+						Boolean presente = ListaHabitaciones.contains(habitacion);
+						if(!presente){
+							ListaHabitaciones.add(habitacion);
+						}
+					}
 
 				} else {
 					ArrayList<Habitacion> listaHabitaciones = new ArrayList<Habitacion>();
-					ListaHabitaciones.add(HabitacionActual);
+					listaHabitaciones.add(HabitacionActual);
 					Habitaciones.put(fields[1], listaHabitaciones);
+					ListaHabitaciones.add(HabitacionActual);
 
 				}
 
@@ -244,8 +244,11 @@ public class hotel {
 	}
 
 	public void agregarHabitacion(int id, String tipo, String ubicacion, int capacidad, boolean vista, boolean balcon,
-			boolean cocina, boolean EstaOcupada) {
-		Habitacion hab = new Habitacion(id, tipo, ubicacion, capacidad, vista, balcon, cocina);
+			boolean cocina, boolean EstaOcupada, boolean aire,
+    		boolean calefaccion, boolean tv, boolean cafetera, boolean ropaytapetes, boolean plancha, boolean secador, boolean voltajeac,
+    		boolean tomausba, boolean tomausbc, boolean desayuno) {
+		Habitacion hab = new Habitacion(id, tipo, ubicacion, capacidad, vista, balcon, cocina, aire, calefaccion, tv, cafetera, ropaytapetes, plancha, secador,
+				voltajeac, tomausba, tomausbc, desayuno);
 
 		Boolean ispresenteTipo = Habitaciones.containsKey(tipo);
 		if (ispresenteTipo) {
@@ -310,7 +313,26 @@ public class hotel {
 							"Capacidad: " + java.lang.String.valueOf(habitacionActual.getCapacidad()) + "\n" + "Vista: "
 							+ java.lang.String.valueOf(habitacionActual.isVista()) + "\n" + "Balcon: "
 							+ java.lang.String.valueOf(habitacionActual.isBalcon()) + "\n" + "Cocina: "
-							+ java.lang.String.valueOf(habitacionActual.isCocina());
+							+ java.lang.String.valueOf(habitacionActual.isCocina())+ "\n" + "Aire: "
+							+ java.lang.String.valueOf(habitacionActual.getAire())+ "\n" + "Calefacción: "
+							+ java.lang.String.valueOf(habitacionActual.getCalefaccion())+ "\n" + "Tv: "
+							+ java.lang.String.valueOf(habitacionActual.getTv())+ "\n" + "Cafetera: "
+							+ java.lang.String.valueOf(habitacionActual.getCafetera())+ "\n" + "Ropa y tapetes: "
+							+ java.lang.String.valueOf(habitacionActual.getRopaYTapetes())+ "\n" + "Plancha: "
+							+ java.lang.String.valueOf(habitacionActual.getPlancha())+ "\n" + "Secador: "
+							+ java.lang.String.valueOf(habitacionActual.getSecador())+ "\n" + "Voltaje AC: "
+							+ java.lang.String.valueOf(habitacionActual.getVoltajeAc())+ "\n" + "Toma USB A: "
+							+ java.lang.String.valueOf(habitacionActual.getTomaUSBA())+ "\n" + "Toma USB C: "
+							+ java.lang.String.valueOf(habitacionActual.getTomaUSBC())+ "\n" + "Desayuno: "
+							+ java.lang.String.valueOf(habitacionActual.getDesayuno())+ "\n" + ", Parqueadero Pago: "
+							+ java.lang.String.valueOf(habitacionActual.getParqueaderoPagoH())+ "\n" + ", Parqueadero gratis: "
+							+ java.lang.String.valueOf(habitacionActual.getParqueaderoGratisH())+ "\n" + ", Piscina: "
+							+ java.lang.String.valueOf(habitacionActual.getPiscina())+ "\n" + ", Zonas Humedas: "
+							+ java.lang.String.valueOf(habitacionActual.getZonasHumedas())+ "\n" + ", BBQ: "
+							+ java.lang.String.valueOf(habitacionActual.getBQQ())+ "\n" + ", Wifi: "
+							+ java.lang.String.valueOf(habitacionActual.getWifi())+ "\n" + ", Recepción 24/7: "
+							+ java.lang.String.valueOf(habitacionActual.getRecepcion24H())+ "\n" + ", Mascotas: "
+							+ java.lang.String.valueOf(habitacionActual.getMascotas());;
 					return cadena;
 				}
 			}
