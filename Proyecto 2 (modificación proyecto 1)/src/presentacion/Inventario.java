@@ -60,8 +60,14 @@ import java.awt.event.ActionEvent;
 						if (habitacion ==null) {
 							JOptionPane.showMessageDialog(null, "No se encontró la habitación");
 						}else {
-							String cadena="Ocupada" +String.valueOf(habitacion.isOcupada());
+							String cadena;
+							if(habitacion.isOcupada()) {
+							     cadena="La habitación esta ocupada";
+							}else {
+							    cadena="La habitación esta libre";
+							}
 							JOptionPane.showMessageDialog(null, cadena);
+							
 						}
 						
 					}

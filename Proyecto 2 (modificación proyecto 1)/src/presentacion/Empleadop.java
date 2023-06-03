@@ -100,7 +100,7 @@ public class Empleadop extends JFrame {
 				btnConsultarHabitacion.setBounds(62, 60, 300, 28);
 				inventario.add(btnConsultarHabitacion);
 			
-				JButton btnConsultarDisponibilidad = new JButton("Consultar Disponibilidad");
+				JButton btnConsultarDisponibilidad = new JButton("Consultar Inventario");
 				btnConsultarDisponibilidad.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Inventario inventario = new Inventario(hotel);
@@ -116,7 +116,13 @@ public class Empleadop extends JFrame {
 		btnConsultarInventario.setBounds(62, 60, 300, 28);
 		contentPane.add(btnConsultarInventario);
 
-		JButton btnRegistrarConsumo = new JButton("Registrar Consumo");
+		JButton btnRegistrarConsumo = new JButton("Registrar Servicio");
+		btnRegistrarConsumo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AgregarEditarServicio agregarS = new AgregarEditarServicio(hotel);
+				agregarS.setVisible(true);
+			}
+		});
 		btnRegistrarConsumo.setBounds(62, 100, 300, 28);
 		contentPane.add(btnRegistrarConsumo);
 
