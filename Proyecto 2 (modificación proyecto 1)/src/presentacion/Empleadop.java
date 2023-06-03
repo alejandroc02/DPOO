@@ -1,5 +1,7 @@
 package presentacion;
+
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JDialog;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.time.LocalDate;
@@ -54,7 +57,7 @@ public class Empleadop extends JFrame {
 	 * Create the frame.
 	 */
 	public Empleadop() {
-		this.plano= new Plano();
+		this.plano = new Plano();
 		plano.CargarArchivos();
 		this.hotel = this.plano.hotel;
 
@@ -65,93 +68,114 @@ public class Empleadop extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null); 
+		contentPane.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("Aplicación Empleado");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(0, 30, 421, 13);
+		contentPane.add(lblNewLabel);
+
 		JButton btnConsultarInventario = new JButton("Inventario y Habitaciones");
 		btnConsultarInventario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JDialog inventario = new JDialog();
+				inventario.setTitle("Inventario");
+				inventario.setLayout(null);
+				inventario.setSize(430, 200);
+				//tranaja aqui Pablo
+				JLabel labelHabitaciones = new JLabel("Inventario Y Habitaciones");
+				labelHabitaciones.setFont(new Font("Tahoma", Font.BOLD, 16));
+				labelHabitaciones.setHorizontalAlignment(SwingConstants.CENTER);
+				labelHabitaciones.setBounds(0, 20, 421, 13);
+				inventario.add(labelHabitaciones);
+
+				JButton btnConsultarHabitacion = new JButton("Consultar Habitaciones");
+				btnConsultarHabitacion.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ConsultarHabitacion consultarh = new ConsultarHabitacion(hotel);
+						consultarh.setVisible(true);
+					}
+				});
+				btnConsultarHabitacion.setBounds(62, 60, 300, 28);
+				inventario.add(btnConsultarHabitacion);
+			
+				JButton btnConsultarDisponibilidad = new JButton("Consultar Disponibilidad");
+				btnConsultarDisponibilidad.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Inventario inventario = new Inventario(hotel);
+						inventario.setVisible(true);
+					}
+				});
+				btnConsultarDisponibilidad.setBounds(62, 100, 300, 28);
+				inventario.add(btnConsultarDisponibilidad);
 				
+				inventario.setVisible(true);
 			}
 		});
 		btnConsultarInventario.setBounds(62, 60, 300, 28);
 		contentPane.add(btnConsultarInventario);
-		
-	
+
 		JButton btnRegistrarConsumo = new JButton("Registrar Consumo");
 		btnRegistrarConsumo.setBounds(62, 100, 300, 28);
 		contentPane.add(btnRegistrarConsumo);
-		
+
 		JButton btnRegistrarHuesped = new JButton("Registrar Huesped");
 		btnRegistrarHuesped.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AgregarHuespedes agregarh = new AgregarHuespedes(hotel);
+				agregarh.setVisible(true);
 			}
 		});
 		btnRegistrarHuesped.setBounds(62, 140, 300, 28);
 		contentPane.add(btnRegistrarHuesped);
+
 		/**/
 		
-		JButton btnConsultarHabitacion = new JButton("Consultar Habitaciones");
-		btnConsultarHabitacion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ConsultarHabitacion consultarh = new ConsultarHabitacion(hotel);
-				consultarh.setVisible(true);
-			}
-		});
-		btnConsultarHabitacion.setBounds(62, 180, 300, 28);
-		contentPane.add(btnConsultarHabitacion);
-	}
+}
 
 	public class TablaOcupacion extends JFrame {
 
 		private JTable tabla;
 		private DefaultTableModel modelo;
-	
+
 		public TablaOcupacion() {
 			super("Tabla de Ocupacion");
 			setSize(500, 500);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
+
 			Container container = getContentPane();
 			container.setLayout(new BorderLayout());
-	
+
 			String[] columnas = { "Fecha", "ID" };
 			modelo = new DefaultTableModel(columnas, 0);
-	
+
 			tabla = new JTable(modelo);
 			JScrollPane scroll = new JScrollPane(tabla);
 			container.add(scroll, BorderLayout.CENTER);
-	
+
 			List<LocalDate> fechas = new ArrayList<>();
 			fechas.add(LocalDate.of(2023, 5, 1));
 			fechas.add(LocalDate.of(2023, 5, 2));
 			fechas.add(LocalDate.of(2023, 5, 3));
 			fechas.add(LocalDate.of(2023, 5, 4));
 			fechas.add(LocalDate.of(2023, 5, 5));
-	
+
 			List<Integer> ids = new ArrayList<>();
 			ids.add(1);
 			ids.add(2);
 			ids.add(3);
 			ids.add(4);
 			ids.add(5);
-	
+
 			for (LocalDate fecha : fechas) {
 				for (int id : ids) {
 					Object[] fila = { fecha, id };
 					modelo.addRow(fila);
 				}
 			}
-	
+
 			setVisible(true);
-		}}}
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+		}
+	}
+}

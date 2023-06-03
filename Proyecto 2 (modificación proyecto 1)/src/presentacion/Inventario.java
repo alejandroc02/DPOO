@@ -31,6 +31,7 @@ import java.awt.event.ActionEvent;
 		 * Create the frame.
 		 */
 		public Inventario(hotel hotel) {
+			setTitle("Consultar Inventario");
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			setBounds(100, 100, 450, 300);
 			contentPane = new JPanel();
@@ -67,7 +68,7 @@ import java.awt.event.ActionEvent;
 				}
 				
 			});
-	btnConfirmar.setBounds(20, 124, 85, 21);
+	btnConfirmar.setBounds(20, 124, 95, 21);
 	contentPane.add(btnConfirmar);
 	
 	textTipo = new JTextField();

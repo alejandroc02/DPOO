@@ -40,12 +40,10 @@ public class hotel {
 	private Boolean recepcion24H=true;
 	private Boolean mascotas=false;
 	
-	//private graficas graficas;
 	public hotel(String ArchivoHabitaciones, String ArchivoMenu, String ArchivoTarifas,
 			String ArchivoServicios, String ArchivoUsuarios) {
 		this.CargarArchivos(ArchivoHabitaciones, ArchivoMenu, ArchivoTarifas, ArchivoServicios, ArchivoUsuarios);
 		this.Restaurante=new restaurante(ArchivoMenu);
-		//this.graficas = new graficas();
 
 	}
 
