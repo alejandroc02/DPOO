@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JDialog;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.time.LocalDate;
@@ -83,7 +84,7 @@ public class Empleadop extends JFrame {
 				inventario.setTitle("Inventario");
 				inventario.setLayout(null);
 				inventario.setSize(430, 200);
-				//tranaja aqui Pablo
+				
 				JLabel labelHabitaciones = new JLabel("Inventario Y Habitaciones");
 				labelHabitaciones.setFont(new Font("Tahoma", Font.BOLD, 16));
 				labelHabitaciones.setHorizontalAlignment(SwingConstants.CENTER);
@@ -135,7 +136,76 @@ public class Empleadop extends JFrame {
 		});
 		btnRegistrarHuesped.setBounds(62, 140, 300, 28);
 		contentPane.add(btnRegistrarHuesped);
+		
+		JButton tablaOcupacion = new JButton("Tabla Ocupacion");
+		tablaOcupacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TablaOcupacion tabla;
+				tabla = new TablaOcupacion();
+			}
+		});
+		tablaOcupacion.setBounds(62, 200, 300, 28);
+		contentPane.add(tablaOcupacion);
+		
+		JButton pagoTarjeta = new JButton("Pago Tarjeta");
+		pagoTarjeta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JDialog pagoTarjeta = new JDialog();
+				pagoTarjeta.setTitle("Pago tarjeta");
+				pagoTarjeta.setLayout(null);
+				pagoTarjeta.setSize(430, 250);
+				
+				JLabel cantidad = new JLabel("Monto");
+				cantidad.setFont(new Font("Tahoma", Font.BOLD, 16));
+				cantidad.setHorizontalAlignment(SwingConstants.LEFT);
+				cantidad.setBounds(62, 20, 421, 13);
+				pagoTarjeta.add(cantidad);
+				
+				JTextField monto = new JTextField("");
+				monto.setBounds(62, 36, 100, 28);
+				pagoTarjeta.add(monto);
+				monto.setColumns(10);
 
+				JLabel idReserva = new JLabel("Id Reserva");
+				idReserva.setFont(new Font("Tahoma", Font.BOLD, 16));
+				idReserva.setHorizontalAlignment(SwingConstants.LEFT);
+				idReserva.setBounds(62, 100, 421, 13);
+				pagoTarjeta.add(idReserva);
+				
+				JTextField id = new JTextField("");
+				id.setBounds(62, 120, 100, 28);
+				pagoTarjeta.add(id);
+				id.setColumns(10);
+				
+				
+				JButton btnRealizarPago = new JButton("Realizar Pago");
+				btnRealizarPago.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						int dineroPagar = Integer.parseInt(monto.getText());
+						String idReserva = id.getText();
+						PagoTarjeta pagoTarjeta = new PagoTarjeta(dineroPagar,idReserva,hotel);
+						pagoTarjeta.setVisible(true);
+					}
+				});
+				btnRealizarPago.setBounds(62, 160, 300, 28);
+				pagoTarjeta.add(btnRealizarPago);
+				
+				pagoTarjeta.setVisible(true);
+			}
+		});
+		pagoTarjeta.setBounds(62, 240, 300, 28);
+		contentPane.add(pagoTarjeta);
+
+		JButton reserva = new JButton("Reservar");
+		reserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Reservar reserva;
+				reserva = new Reservar(hotel);
+				reserva.setVisible(true);
+			}
+		});
+		reserva.setBounds(62, 280, 300, 28);
+		contentPane.add(reserva);
 		/**/
 		
 }
@@ -148,7 +218,7 @@ public class Empleadop extends JFrame {
 		public TablaOcupacion() {
 			super("Tabla de Ocupacion");
 			setSize(500, 500);
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 			Container container = getContentPane();
 			container.setLayout(new BorderLayout());
